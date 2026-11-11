@@ -1,0 +1,64 @@
+{{ 'shimpin-pdp.css' | asset_url | stylesheet_tag }}
+
+<div id="Reviews" class="shimpin-reviews page-width" data-shimpin-reviews
+     style="--reviews-collapsed: {{ section.settings.collapsed_height }}px">
+  {%- if section.settings.heading != blank -%}
+    <h2 class="shimpin-reviews__title">{{ section.settings.heading | escape }}</h2>
+  {%- endif -%}
+  <div class="shimpin-reviews__body">
+    <div class="shimpin-reviews__inner">
+      {%- for block in section.blocks -%}
+        {% render block %}
+      {%- endfor -%}
+    </div>
+  </div>
+  <button type="button" class="shimpin-reviews__toggle button button--secondary" hidden
+          aria-expanded="false" data-more="Show all reviews" data-less="Show fewer reviews">
+    Show all reviews
+  </button>
+</div>
+
+<script>
+  (function () {
+    document.querySelectorAll('[data-shimpin-reviews]').forEach(function (root) {
+      if (root.dataset.ready) return;
+      root.dataset.ready = '1';
+      var body = root.querySelector('.shimpin-reviews__body');
+      var inner = root.querySelector('.shimpin-reviews__inner');
+      var btn = root.querySelector('.shimpin-reviews__toggle');
+
+      function update() {
+        if (body.classList.contains('is-expanded')) { body.classList.remove('is-collapsed'); return; }
+        var tall = body.scrollHeight > body.clientHeight + 20;
+        body.classList.toggle('is-collapsed', tall);
+        btn.hidden = !tall;
+      }
+
+      btn.addEventListener('click', function () {
+        var open = body.classList.toggle('is-expanded');
+        btn.setAttribute('aria-expanded', open);
+        btn.textContent = open ? btn.dataset.less : btn.dataset.more;
+        update();
+        if (!open) root.scrollIntoView({ behavior: 'smooth' });
+      });
+
+      if ('ResizeObserver' in window) new ResizeObserver(update).observe(inner);
+      update();
+      setTimeout(update, 2500); // Judge.me loads late
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Shimpin reviews",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Customer reviews" },
+    { "type": "range", "id": "collapsed_height", "label": "Height before 'Show all'", "min": 300, "max": 900, "step": 50, "unit": "px", "default": 500 }
+  ],
+  "blocks": [ { "type": "@app" } ],
+  "presets": [ { "name": "Shimpin reviews" } ]
+}
+{% endschema %}

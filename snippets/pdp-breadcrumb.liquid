@@ -1,0 +1,15 @@
+{%- liquid
+  assign crumb_collection = collection
+  if crumb_collection == blank
+    assign crumb_collection = product.collections | first
+  endif
+-%}
+<nav class="pdp-breadcrumb pdp-breadcrumb--{{ modifier | default: 'desktop' }}" aria-label="Breadcrumb">
+  <a href="{{ routes.root_url }}">Home</a>
+  {%- if crumb_collection != blank -%}
+    <span aria-hidden="true">/</span>
+    <a href="{{ crumb_collection.url }}">{{ crumb_collection.title }}</a>
+  {%- endif -%}
+  <span aria-hidden="true">/</span>
+  <span aria-current="page">{{ product.title }}</span>
+</nav>

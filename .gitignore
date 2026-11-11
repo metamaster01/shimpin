@@ -1,0 +1,13 @@
+# Dependencies and build output
+node_modules/
+
+# Secrets and local config
+.env
+.env.*
+.shopify/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+*.log

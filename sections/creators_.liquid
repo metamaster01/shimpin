@@ -1,0 +1,61 @@
+<div class="page-width creators">
+  {% for creator in shop.metaobjects.creator.values %}
+    <div class="creator grid grid--col-2">
+      <div class="creator-image">{{ creator.photo.value | img_tag }}</div> 
+      <h2 class="creator-title">{{ creator.name }}</h2>
+      <p class="creator-paragraph">{{ creator.bio }}</p>
+      <h3>Test test</h3>
+      <div class="creator-products">
+        {% for product in creator.creator_of.value %}
+          <a href="{{ product.url }}" class="creator-product">
+             {% render 'card-product',
+                card_product: product,
+                card_design: block.settings.card_design,
+                media_aspect_ratio: block.settings.image_ratio,
+                show_secondary_image: block.settings.show_secondary_image,
+                show_vendor: block.settings.show_vendor,
+                badge_card_toggle: block.settings.badge_card_toggle,
+                show_rating: block.settings.show_rating, 
+                section_id: section.id
+            %}
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %} 
+</div>
+
+<style>
+  .creators {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+  }
+  .creator {
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.23) 0px 2px 5px 5px;
+    padding: 20px;
+  }
+  .creator-products {
+    display: flex;
+    column-gap: 15px;
+    justify-content: center;
+  }
+  .creator-product {
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-end;
+    text-decoration: none;
+    color: rgb(var(--color-foreground));
+  }
+
+</style>
+
+{% schema %}
+  {
+    "name": "Creators",
+    "settings": []
+  }
+{% endschema %} 

@@ -1,0 +1,149 @@
+{%- unless product.has_only_default_variant -%}
+	{% for product_option in product.options_with_values %}
+		  {%- assign current_variant_option = product_option.name | downcase -%}
+		  {%- assign current_size_variant_option = settings.text_variant_size | downcase -%}
+		  {%- assign current_color_variant_option = settings.text_variant_color | downcase -%}
+		  {%- assign current_color = false -%} 
+		  {%- assign current_size = false -%}
+		  {%- assign product_card_variants_limit = product_card_variants_limit | plus: '0' -%}
+		  
+		  {% if current_size_variant_option == current_variant_option %}
+			{%- assign current_size = true -%}
+		  {% endif %}
+		  
+		  {% if current_color_variant_option == current_variant_option %}
+			{%- assign current_color = true -%}           
+		  {% endif %}
+		  
+		  {% if current_color %}
+			{%- assign values_option = product.options_by_name['Color'].values -%}
+			{% elsif current_size %}
+			{%- assign values_option = product.options_by_name['Size'].values -%}
+		  {% else %}
+			{%- assign values_option = product_option.values -%}
+		  {% endif %}
+		  
+		  {% case variants_type_url %}
+		  {% when 'only_color' %}
+			{% if current_color %}
+			  <ul class="product_variants list-unstyled">
+				{%- for value in values_option limit: product_card_variants_limit -%}
+				  {%- for variant in product.variants -%}
+				   {% if variant.options contains value %}
+						{%- assign variant_needed = variant -%}
+					{% endif %} 
+					{%- if variant.title contains value -%}
+					  {%- assign productOptionURL = product.url | append: "?variant=" | append: variant.id -%}
+					  {%- break -%}
+					{%- endif -%}
+				  {%- endfor -%}
+				  <li>
+					<a class="color_options" href="{{ productOptionURL }}" style="{% if variant_needed.metafields.image.swatch %} background-size: cover; background-size: cover; background-image: url({{variant_needed.metafields.image.swatch}}); {% elsif variant_needed.metafields.color.swatch %} background-color: {{ variant_needed.metafields.color.swatch }}; {% else %} background-color: {{ value | downcase | split: ' ' | last | handle }}; {% endif %}"></a>
+				  </li>
+				{%- endfor -%}
+				{% if values_option.size > product_card_variants_limit %}
+				  <li class="color_options_info">+ {{ values_option.size | minus: product_card_variants_limit }}</li>
+				{% endif %}
+			  </ul>
+			{% endif %}
+		  {% when 'only_size' %}
+			{% if current_size %}
+			  
+			  <ul class="product_variants mt-1 list-unstyled">
+				{%- for value in values_option limit: product_card_variants_limit -%} 
+				  {%- for variant in product.variants -%}
+				   {% if variant.options contains value %}
+						{%- assign variant_needed = variant -%}
+					{% endif %} 
+					{%- if variant.title contains value -%}
+					  {%- assign productOptionURL = product.url | append: "?variant=" | append: variant.id -%}
+					  {%- break -%}
+					{%- endif -%}
+				  {%- endfor -%}
+				  <li>
+					<a class="btn_option" href="{{ productOptionURL }}">
+					  {{ value }}
+					</a>
+				  </li>
+				{%- endfor -%}
+				{% if values_option.size > product_card_variants_limit %}
+				  <li class="color_options_info">+ {{ values_option.size | minus: product_card_variants_limit }}</li>
+				{% endif %}
+			  </ul>
+			{% endif %}
+		  {% when 'only_size_color' %}
+			{% if current_color %}
+			  <ul class="product_variants mt-1 list-unstyled">
+				{%- for value in values_option limit: product_card_variants_limit -%}
+				  {%- for variant in product.variants -%}
+				   {% if variant.options contains value %}
+						{%- assign variant_needed = variant -%}
+					{% endif %} 
+					{%- if variant.title contains value -%}
+					  {%- assign productOptionURL = product.url | append: "?variant=" | append: variant.id -%}
+					  {%- break -%}
+					{%- endif -%}
+				  {%- endfor -%}
+				  <li>
+					<a class="color_options" href="{{ productOptionURL }}" style="{% if variant_needed.metafields.image.swatch %}background-size: cover; background-image: url({{variant_needed.metafields.image.swatch}}); {% elsif variant_needed.metafields.color.swatch %} background-color: {{ variant_needed.metafields.color.swatch }}; {% else %} background-color: {{ value | downcase | split: ' ' | last | handle }}; {% endif %}"></a>
+				  </li>
+				{%- endfor -%}
+				{% if values_option.size > product_card_variants_limit %}
+				  <li class="color_options_info">+ {{ values_option.size | minus: product_card_variants_limit }}</li>
+				{% endif %}
+			  </ul>
+			{% endif %}
+			{% if current_size %}
+			  <ul class="product_variants list-unstyled">
+				{%- for value in values_option limit: product_card_variants_limit -%}
+				  {%- for variant in product.variants -%}
+				   {% if variant.options contains value %}
+						{%- assign variant_needed = variant -%}
+					{% endif %} 
+					{%- if variant.title contains value -%}
+					  {%- assign productOptionURL = product.url | append: "?variant=" | append: variant.id -%}
+					  {%- break -%}
+					{%- endif -%}
+				  {%- endfor -%}
+				  <li>
+					<a class="btn_option" href="{{ productOptionURL }}">
+					  {{ value }}
+					</a>
+				  </li>
+				{%- endfor -%}
+				{% if values_option.size > product_card_variants_limit %}
+				  <li class="color_options_info">+ {{ values_option.size | minus: product_card_variants_limit }}</li>
+				{% endif %}
+			  </ul>
+			{% endif %}
+		  {% when 'all' %}
+			<ul class="product_variants list-unstyled">
+			  {%- for value in values_option limit: product_card_variants_limit -%}
+				{%- for variant in product.variants -%}
+				  {% if variant.options contains value %}
+						{%- assign variant_needed = variant -%}
+					{% endif %} 
+				  {%- if variant.title contains value -%}
+					{%- assign productOptionURL = product.url | append: "?variant=" | append: variant.id -%}
+					{%- break -%}
+				  {%- endif -%}
+				{%- endfor -%}
+				<li>
+				  <a class="{% if current_color %} color_options {% else %} btn_option {% endif %}" href="{{ productOptionURL }}"
+					  {%- if current_color -%}
+					   style="{% if variant_needed.metafields.image.swatch %}background-size: cover; background-image: url({{variant_needed.metafields.image.swatch}}); {% elsif variant_needed.metafields.color.swatch %} background-color: {{ variant_needed.metafields.color.swatch }}; {% else %} background-color: {{ value | downcase | split: ' ' | last | handle }}; {% endif %}"
+				  {%- endif -%}
+				  >
+					{% unless current_color %}
+					  {{ value }}
+					{% endunless %}
+				  </a>
+				</li>
+			  {%- endfor -%}
+			  {% if values_option.size > product_card_variants_limit %}
+				<li class="color_options_info">+ {{ values_option.size | minus: product_card_variants_limit }}</li>
+			  {% endif %}
+			</ul>
+		  {% endcase %}
+	{% endfor %}
+{%- endunless -%}

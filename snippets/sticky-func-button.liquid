@@ -1,0 +1,14 @@
+
+<sticky-product-component id="sticky-add-to-cart" class="sticky-add-to-cart quick-add-hidden no-js-hidden hidden">
+  <div class="sticky-cart-wrapper">
+       {%- if  settings.wishlist_toggle != blank -%}
+          <div data-sticky-id="wishlist" data-sticky-layout="sticky"></div>
+       {%- endif -%} 
+
+       {%- if  settings.compare_toggle != blank -%}
+          <div data-sticky-id="compare" data-sticky-layout="sticky"></div>
+       {%- endif -%} 
+
+      <div data-target-id="atc"></div>
+  </div> 
+</sticky-product-component>

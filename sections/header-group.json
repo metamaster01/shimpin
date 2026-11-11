@@ -1,0 +1,99 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "announcement-bar": {
+      "type": "zmz-announcement-bar",
+      "blocks": {
+        "announcement_qd9WPX": {
+          "type": "announcement",
+          "settings": {
+            "only_home": false,
+            "text": "Use NEW10 on your first order to get an extra 10% discount",
+            "section_heading_scale_1": 100,
+            "text_color_1": "",
+            "btn_text": "",
+            "price_text": "",
+            "section_heading_scale_2": 100,
+            "text_color_2": "",
+            "text_alignment": "center",
+            "color_scheme": "accent-1",
+            "link": "",
+            "ad_timer": true,
+            "time": "2023-08-25T00:30:00Z",
+            "columns_mobile": "2"
+          }
+        },
+        "announcement_coupon_YeRD3R": {
+          "type": "announcement-coupon",
+          "disabled": true,
+          "settings": {
+            "only_home": false,
+            "sale-heading": "LIMITED TIME OFFER",
+            "sale-text": "Get 10% OFF on your order. Use code NEW10 at checkout.",
+            "sale-mobile": "Flat 10% OFF. Apply code NEW10.",
+            "discount-percent": "10% OFF",
+            "coupon": "NEW10",
+            "disable_period": 1,
+            "color_scheme": "accent-1",
+            "ad_timer": false,
+            "time": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_qd9WPX",
+        "announcement_coupon_YeRD3R"
+      ],
+      "settings": {
+        "page_width": 1800,
+        "separate_border": true
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "page_width": 1600,
+        "enable_full": false,
+        "color_scheme": "background-1",
+        "enable_transparent": false,
+        "enable_inverse": false,
+        "logo_position": "middle-left",
+        "menu": "main-menu",
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "always",
+        "show_line_separator": false,
+        "search_style": "row",
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "local_selector_topbar": true,
+        "show_account_text": false,
+        "reverse_account_text": false,
+        "show_wishlist_text": false,
+        "reverse_wishlist_text": false,
+        "show_search_text": false,
+        "reverse_search_text": false,
+        "show_cart_text": false,
+        "reverse_cart_text": true,
+        "mobile_logo_position": "center",
+        "margin_bottom": 0,
+        "social_style": "color",
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
+}

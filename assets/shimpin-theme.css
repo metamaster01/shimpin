@@ -1,0 +1,91 @@
+:root {
+  --shimpin-navy: #0E3051;
+  --shimpin-yellow: #FFFF8D;
+  --shimpin-ink: #1a1a1a;
+  --shimpin-line: #e6e8ec;
+  --jdgm-primary-color: #0E3051;
+}
+
+/* ---- Readable body text (theme default is 55% opacity) ---- */
+body,
+.color-background-1,
+.color-background-2 { color: rgba(var(--color-foreground), 0.88); }
+.light { opacity: 1; color: rgba(var(--color-foreground), 0.75); }
+
+/* ---- Prices in navy, not red ---- */
+.price-item--sale,
+.price--on-sale .price-item--last { color: var(--shimpin-navy) !important; }
+
+/* ---- Header ---- */
+.header-wrapper {
+  background: #fff;
+  border-bottom: 1px solid var(--shimpin-line);
+}
+.header-wrapper.gradient { background-attachment: scroll; }
+.shopify-section-header-sticky { box-shadow: 0 2px 12px rgba(14, 48, 81, 0.08); }
+
+@media screen and (min-width: 990px) {
+  .header--middle-left { column-gap: 3.2rem; }
+  .header--middle-left .header__inline-menu { margin-left: 0; }
+
+  /* search sits on the same line as the icons, not under them */
+  .header.header--has-search_row .header__icons { flex-wrap: nowrap; align-items: center; gap: 0.4rem; }
+  .header.header--has-search_row .header__icons .header__search__row { flex-basis: auto; order: -1; }
+}
+
+.header__menu-item {
+  padding: 1rem 1.4rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--shimpin-navy);
+}
+.header__menu-item:hover span { text-decoration: none; box-shadow: 0 2px 0 var(--shimpin-navy); }
+
+/* pill search */
+.header__search__row .header-search__search {
+  margin: 0 1.2rem 0 0;
+  width: 28rem;
+  max-width: 28rem;
+  border: 0;
+  border-radius: 999px;
+  background: #f1f2f4;
+}
+.header__search__row .search__input.field__input {
+  background: transparent;
+  height: 4.2rem;
+  padding: 0 4rem 0 4.6rem;
+}
+.header__search__row .field__label {
+  top: 50%; transform: translateY(-50%);
+  left: 4.6rem; font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.55);
+}
+.header__search__row .search__button { margin-top: 0; left: 1.2rem; top: 1rem; }
+.header__search__row .reset__button { margin-top: 0; top: 0.9rem; right: 0.8rem; }
+.header__icon { color: var(--shimpin-navy); }
+.header__heading-link { margin-left: 0; }
+
+/* ---- Mobile drawer ---- */
+.menu-drawer__menu-item {
+  padding: 1.6rem 2.4rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--shimpin-navy);
+  border-bottom: 1px solid var(--shimpin-line);
+}
+.menu-drawer__submenu .menu-drawer__menu-item { font-weight: 400; font-size: 1.5rem; }
+.menu-drawer__utility-links { padding: 2rem 2.4rem; }
+
+/* ---- Judge.me reviews in navy ---- */
+.jdgm-star, .jdgm-prev-badge__stars .jdgm-star { color: var(--shimpin-navy) !important; }
+.jdgm-histogram__bar-content { background: var(--shimpin-navy) !important; }
+.jdgm-widget .jdgm-btn--solid,
+.jdgm-write-rev-link,
+.jdgm-submit-rev { background: var(--shimpin-navy) !important; border-color: var(--shimpin-navy) !important; color: #fff !important; }
+.jdgm-rev__author,
+.jdgm-rev-widg a,
+.jdgm-sort-dropdown-wrapper select { color: var(--shimpin-navy) !important; }
+.jdgm-rev__body { color: var(--shimpin-ink); }
+.jdgm-rev-widg__title { display: none; } /* removes the duplicate "Customer Reviews" */
+.jdgm-rev__icon, .jdgm-all-reviews__header .jdgm-icon { color: var(--shimpin-navy) !important; }
