@@ -629,7 +629,9 @@
     
       
       {%- if shop.customer_accounts_enabled -%}
-        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="{% if section.settings.show_account_text %}header__icon__text{% if section.settings.reverse_account_text %} header__icon__text--reverse{% endif %}{% else %} header__icon{% endif %} header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
+
+        
+        {% comment %} <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="{% if section.settings.show_account_text %}header__icon__text{% if section.settings.reverse_account_text %} header__icon__text--reverse{% endif %}{% else %} header__icon{% endif %} header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
           {% render 'icon-account' %}
           <span class="icon-text{% if section.settings.show_account_text %} visually-hidden-down{% else%} visually-hidden{% endif %}">
             {%- liquid
@@ -640,7 +642,10 @@
               endif
             -%}
           </span>
-        </a>
+        </a> {% endcomment %}
+
+
+        {% render 'header-account' %}
       {%- endif -%}
 
       {% unless section.settings.menu_type_desktop == 'drawer' %} 

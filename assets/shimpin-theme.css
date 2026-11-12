@@ -244,3 +244,11 @@ footer.footer .list-social__item .icon { background: #fff; border-radius: 50%; p
 /* keep the long brand text from forcing the first column wide */
 footer.footer .footer-block__brand-info .rte,
 footer.footer .footer-block__brand-info .rte p { max-width: 26rem; }
+
+
+.account-menu { position: relative; }
+.account-menu__panel { position: absolute; right: 0; top: calc(100% + 0.8rem); width: 22rem; padding: 1.6rem; background: #fff; border: 1px solid var(--shimpin-line); border-radius: 1.2rem; box-shadow: 0 8px 24px rgba(14,48,81,.12); z-index: 20; display: grid; gap: 1rem; }
+.account-menu__panel a:not(.button) { color: var(--shimpin-navy); text-decoration: none; font-size: 1.4rem; }
+.account-menu__panel a:not(.button):hover { text-decoration: underline; }
+.account-menu__hello { margin: 0; font-weight: 600; color: var(--shimpin-navy); }
+.account-menu__create { text-align: center; }

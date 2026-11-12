@@ -1,0 +1,19 @@
+.shimpin-auth { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - var(--header-height, 8rem)); }
+.shimpin-auth__media { position: relative; background: #0E3051; overflow: hidden; }
+.shimpin-auth__media img, .shimpin-auth__media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.shimpin-auth__caption { position: absolute; left: 4rem; bottom: 4rem; margin: 0; color: #fff; font-family: var(--font-heading-family); font-size: 3.2rem; text-shadow: 0 2px 12px rgba(0,0,0,.35); }
+.shimpin-auth__panel { display: flex; align-items: center; justify-content: center; padding: 4rem 2.4rem; background: #fff; }
+.shimpin-auth__box { width: 100%; max-width: 40rem; text-align: center; }
+.shimpin-auth__logo { display: inline-block; margin-bottom: 3.2rem; }
+.shimpin-auth__box h1 { font-size: 3rem; color: #0E3051; margin: 0 0 1rem; }
+.shimpin-auth__box p { color: #1a1a1a; margin: 0 0 2.4rem; }
+.shimpin-auth__box .button { margin-bottom: 1.2rem; }
+.shimpin-auth__or, .shimpin-auth__methods { font-size: 1.3rem; margin: 1.6rem 0 1rem !important; }
+.shimpin-auth__link { color: #0E3051; }
+
+
+@media screen and (max-width: 749px) {
+  .shimpin-auth { grid-template-columns: 1fr; }
+  .shimpin-auth__media { min-height: 24rem; }
+  .shimpin-auth__caption { left: 2rem; bottom: 2rem; font-size: 2.4rem; }
+}
