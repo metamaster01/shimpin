@@ -1,0 +1,4 @@
+{
+  "sections": { "main": { "type": "shimpin-auth", "settings": {} } },
+  "order": ["main"]
+}
