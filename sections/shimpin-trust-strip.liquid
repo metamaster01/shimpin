@@ -1,0 +1,98 @@
+{%- comment -%}
+  Bottom navy banner: Free Alteration / 4 hrs Delivery / Hassle-free Returns / Endless Options
+  Pick a built-in line icon per block, or upload your own (SVG/PNG, white works best).
+{%- endcomment -%}
+
+<section
+  class="shp-trust"
+  style="--shp-trust-bg: {{ section.settings.bg_color }}; --shp-trust-ink: {{ section.settings.text_color }}; --shp-pad-d: {{ section.settings.padding_desktop }}px; --shp-pad-m: {{ section.settings.padding_mobile }}px;"
+>
+  <ul class="shp-trust__list" style="--cols: {{ section.blocks.size | at_most: 4 | at_least: 1 }}">
+    {%- for block in section.blocks -%}
+      <li class="shp-trust__item" {{ block.shopify_attributes }}>
+        {%- assign b = block.settings -%}
+        {%- capture inner -%}
+          <span class="shp-trust__icon">
+            {%- if b.custom_icon != blank -%}
+              {{ b.custom_icon | image_url: width: 192 | image_tag: width: 64, height: 64, loading: 'lazy', alt: '', class: 'shp-trust__custom' }}
+            {%- else -%}
+              {%- render 'shimpin-trust-icon', icon: b.icon -%}
+            {%- endif -%}
+          </span>
+          <span class="shp-trust__label">{{ b.label | escape }}</span>
+        {%- endcapture -%}
+        {%- if b.link != blank -%}
+          <a class="shp-trust__inner" href="{{ b.link }}">{{ inner }}</a>
+        {%- else -%}
+          <div class="shp-trust__inner">{{ inner }}</div>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{% stylesheet %}
+  .shp-trust { background: var(--shp-trust-bg, #0e3051); color: var(--shp-trust-ink, #fff); padding: var(--shp-pad-m) 1.6rem; }
+  @media screen and (min-width: 750px) { .shp-trust { padding: var(--shp-pad-d) 3rem; } }
+  .shp-trust__list {
+    list-style: none; margin: 0 auto; padding: 0; max-width: 112rem;
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3.2rem 1.6rem;
+  }
+  @media screen and (min-width: 750px) {
+    .shp-trust__list { grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); gap: 2.4rem; }
+  }
+  .shp-trust__inner {
+    display: flex; flex-direction: column; align-items: center; gap: 1.6rem;
+    text-align: center; color: inherit; text-decoration: none;
+  }
+  .shp-trust__icon { display: grid; place-items: center; width: clamp(5.2rem, 6vw, 7.2rem); height: clamp(5.2rem, 6vw, 7.2rem); }
+  .shp-trust__svg, .shp-trust__custom { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .shp-trust__label { font-size: clamp(1.3rem, 1.2vw, 1.5rem); line-height: 1.4; }
+  a.shp-trust__inner:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+  a.shp-trust__inner:hover .shp-trust__label { text-decoration: underline; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Shimpin trust strip",
+  "tag": "div",
+  "class": "shimpin-trust-section",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#0E3051" },
+    { "type": "color", "id": "text_color", "label": "Icon and text colour", "default": "#FFFFFF" },
+    { "type": "range", "id": "padding_desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Space above and below (desktop)", "default": 56 },
+    { "type": "range", "id": "padding_mobile", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Space above and below (mobile)", "default": 32 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "limit": 4,
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "alteration", "options": [
+          { "value": "alteration", "label": "Alteration (scissors)" },
+          { "value": "delivery", "label": "Fast delivery (clock)" },
+          { "value": "returns", "label": "Returns (box)" },
+          { "value": "options", "label": "Endless options" },
+          { "value": "shield", "label": "Secure / shield" },
+          { "value": "support", "label": "Support (headset)" }
+        ] },
+        { "type": "image_picker", "id": "custom_icon", "label": "Custom icon (replaces the built-in one)" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Free Alteration" },
+        { "type": "url", "id": "link", "label": "Link (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shimpin trust strip",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "alteration", "label": "Free Alteration" } },
+        { "type": "item", "settings": { "icon": "delivery", "label": "4 hrs Delivery*" } },
+        { "type": "item", "settings": { "icon": "returns", "label": "Hassle-free Returns" } },
+        { "type": "item", "settings": { "icon": "options", "label": "Endless Options" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

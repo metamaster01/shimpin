@@ -1,0 +1,248 @@
+{%- comment -%}
+  "What they say" - photo review cards in a swipeable slider.
+  Cards are blocks you edit by hand (photo, product, rating, name, quote).
+{%- endcomment -%}
+
+<section
+  class="shp-reviews"
+  style="
+    --shp-rev-bg: {{ section.settings.bg_color }};
+    --shp-rev-ink: {{ section.settings.text_color }};
+    --shp-star: {{ section.settings.star_color }};
+    --shp-pad-d: {{ section.settings.padding_desktop }}px;
+    --shp-pad-m: {{ section.settings.padding_mobile }}px;
+  "
+>
+  <div class="shp-reviews__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="shp-reviews__title">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <shimpin-reviews class="shp-reviews__slider" role="region" aria-roledescription="carousel" aria-label="{{ section.settings.heading | escape }}">
+        <button type="button" class="shp-reviews__arrow shp-reviews__arrow--prev" data-prev aria-label="Previous reviews">
+          <svg aria-hidden="true" width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M17 5 8 14l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <ul class="shp-reviews__track" data-track>
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign b = block.settings
+              assign pct = b.rating | times: 20
+              assign focal = b.image.presentation.focal_point | default: '50% 50%'
+              assign pos_style = 'object-position:' | append: focal
+            -%}
+            <li class="shp-review" data-card {{ block.shopify_attributes }}>
+              <div class="shp-review__photo">
+                {%- if b.image != blank -%}
+                  {{
+                    b.image
+                    | image_url: width: 700
+                    | image_tag:
+                      widths: '300, 450, 600, 700',
+                      sizes: '(min-width: 990px) 28vw, (min-width: 750px) 42vw, 70vw',
+                      loading: 'lazy',
+                      alt: b.product_name,
+                      class: 'shp-review__img',
+                      style: pos_style
+                  }}
+                {%- else -%}
+                  {{ 'product-apparel-1' | placeholder_svg_tag: 'shp-review__img shp-review__placeholder' }}
+                {%- endif -%}
+              </div>
+
+              <div class="shp-review__body">
+                {%- if b.product_name != blank -%}
+                  <p class="shp-review__product">
+                    {%- if b.product_link != blank -%}<a href="{{ b.product_link }}">{{ b.product_name | escape }}</a>{%- else -%}{{ b.product_name | escape }}{%- endif -%}
+                  </p>
+                {%- endif -%}
+                <span class="shp-stars" style="--pct: {{ pct }}%" role="img" aria-label="{{ b.rating }} out of 5 stars"></span>
+                {%- if b.reviewer != blank -%}
+                  <p class="shp-review__name">&ndash;{{ b.reviewer | escape }}&ndash;</p>
+                {%- endif -%}
+                {%- if b.quote != blank -%}
+                  <blockquote class="shp-review__quote">&ldquo;{{ b.quote | escape }}&rdquo;</blockquote>
+                {%- endif -%}
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <button type="button" class="shp-reviews__arrow shp-reviews__arrow--next" data-next aria-label="Next reviews">
+          <svg aria-hidden="true" width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="m11 5 9 9-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </shimpin-reviews>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .shp-reviews { background: var(--shp-rev-bg, #fff); padding: var(--shp-pad-m) 0; }
+  @media screen and (min-width: 750px) { .shp-reviews { padding: var(--shp-pad-d) 0; } }
+  .shp-reviews__inner { max-width: 120rem; margin: 0 auto; padding: 0 1.6rem; }
+  .shp-reviews__title {
+    margin: 0 0 clamp(2.4rem, 3.6vw, 4.4rem);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-family: var(--font-body-family, inherit);
+    font-weight: 500;
+    font-size: clamp(2.4rem, 3.4vw, 4.2rem);
+    line-height: 1.1;
+    color: var(--shp-rev-ink, #0e3051);
+  }
+
+  .shp-reviews__slider { position: relative; display: block; }
+  .shp-reviews__track {
+    --gap: 1.6rem;
+    --per: 1.25;
+    display: flex;
+    gap: var(--gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .shp-reviews__track::-webkit-scrollbar { display: none; }
+  @media screen and (min-width: 600px) { .shp-reviews__track { --per: 2; } }
+  @media screen and (min-width: 990px) { .shp-reviews__track { --per: 3; --gap: 2.4rem; } }
+
+  .shp-review {
+    flex: 0 0 calc((100% - (var(--per) - 1) * var(--gap)) / var(--per));
+    scroll-snap-align: start;
+    min-width: 0;
+    color: var(--shp-rev-ink, #0e3051);
+    text-align: center;
+  }
+  .shp-review__photo { aspect-ratio: 4 / 5; overflow: hidden; border-radius: 1.4rem; background: #eef0f3; }
+  .shp-review__img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .shp-review__placeholder { fill: #aab4c0; }
+  .shp-review__body { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1.6rem 0.8rem 0; }
+  .shp-review__product { margin: 0; font-size: 1.5rem; font-weight: 500; }
+  .shp-review__product a { color: inherit; text-decoration: none; }
+  .shp-review__product a:hover { text-decoration: underline; }
+  .shp-review__name { margin: 0; font-size: 1.4rem; opacity: 0.85; }
+  .shp-review__quote {
+    margin: 0.4rem 0 0;
+    max-width: 34rem;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* star rating: gold fill up to --pct, grey after, shaped by a star mask */
+  .shp-stars {
+    --size: 1.8rem;
+    display: inline-block;
+    width: calc(var(--size) * 5);
+    height: var(--size);
+    background: linear-gradient(90deg, var(--shp-star, #f5b800) var(--pct), #d8dce2 var(--pct));
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.8l1.4-6.8L2.2 9.3l6.9-.8z'/%3E%3C/svg%3E") 0 0 / var(--size) var(--size) repeat-x;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.8l1.4-6.8L2.2 9.3l6.9-.8z'/%3E%3C/svg%3E") 0 0 / var(--size) var(--size) repeat-x;
+  }
+
+  .shp-reviews__arrow {
+    position: absolute;
+    top: 38%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: none;
+    place-items: center;
+    width: 4.4rem; height: 4.4rem; padding: 0;
+    border: 0; border-radius: 50%;
+    background: #fff; color: #5b6573;
+    box-shadow: 0 2px 10px rgba(14,48,81,0.18);
+    cursor: pointer;
+    transition: opacity 0.2s ease, color 0.2s ease;
+  }
+  .shp-reviews__arrow:hover { color: var(--shp-rev-ink, #0e3051); }
+  .shp-reviews__arrow:focus-visible { outline: 2px solid var(--shp-rev-ink, #0e3051); outline-offset: 2px; }
+  .shp-reviews__arrow[disabled] { opacity: 0; pointer-events: none; }
+  .shp-reviews__arrow--prev { left: -2.2rem; }
+  .shp-reviews__arrow--next { right: -2.2rem; }
+  @media screen and (min-width: 750px) { .shp-reviews__arrow { display: grid; } }
+  @media screen and (min-width: 1300px) {
+    .shp-reviews__arrow { box-shadow: none; background: transparent; width: 4rem; }
+    .shp-reviews__arrow--prev { left: -5.6rem; }
+    .shp-reviews__arrow--next { right: -5.6rem; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('shimpin-reviews')) {
+    customElements.define('shimpin-reviews', class ShimpinReviews extends HTMLElement {
+      connectedCallback() {
+        this.track = this.querySelector('[data-track]');
+        this.prev = this.querySelector('[data-prev]');
+        this.next = this.querySelector('[data-next]');
+        if (!this.track) return;
+        this.prev?.addEventListener('click', () => this.scrollByCard(-1));
+        this.next?.addEventListener('click', () => this.scrollByCard(1));
+        this.track.addEventListener('scroll', () => {
+          cancelAnimationFrame(this.raf);
+          this.raf = requestAnimationFrame(() => this.update());
+        }, { passive: true });
+        this.ro = new ResizeObserver(() => this.update());
+        this.ro.observe(this.track);
+        this.addEventListener('shopify:block:select', (e) => {
+          e.target.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
+        });
+        this.update();
+      }
+      disconnectedCallback() { this.ro?.disconnect(); }
+      scrollByCard(dir) {
+        const card = this.track.querySelector('[data-card]');
+        if (!card) return;
+        const gap = parseFloat(getComputedStyle(this.track).columnGap) || 0;
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        this.track.scrollBy({ left: dir * (card.getBoundingClientRect().width + gap), behavior: reduce ? 'auto' : 'smooth' });
+      }
+      update() {
+        const max = this.track.scrollWidth - this.track.clientWidth - 2;
+        if (this.prev) this.prev.disabled = this.track.scrollLeft <= 2;
+        if (this.next) this.next.disabled = this.track.scrollLeft >= max;
+      }
+    });
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Shimpin reviews",
+  "tag": "div",
+  "class": "shimpin-reviews-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What they say" },
+    { "type": "color", "id": "text_color", "label": "Text colour", "default": "#0E3051" },
+    { "type": "color", "id": "star_color", "label": "Star colour", "default": "#F5B800" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FFFFFF" },
+    { "type": "range", "id": "padding_desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Space above and below (desktop)", "default": 56 },
+    { "type": "range", "id": "padding_mobile", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Space above and below (mobile)", "default": 32 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review card",
+      "limit": 12,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo", "info": "Portrait 4:5, e.g. 800 × 1000 px." },
+        { "type": "text", "id": "product_name", "label": "Product name", "default": "Essence Long Denim" },
+        { "type": "url", "id": "product_link", "label": "Product link (optional)" },
+        { "type": "range", "id": "rating", "min": 1, "max": 5, "step": 0.5, "label": "Rating", "default": 5 },
+        { "type": "text", "id": "reviewer", "label": "Reviewer name", "default": "Lisa" },
+        { "type": "textarea", "id": "quote", "label": "Review", "default": "I like this pants. Its fit and perfect for me. The material is so comfortable that it can be used anywhere." }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Shimpin reviews", "blocks": [ { "type": "review" }, { "type": "review" }, { "type": "review" } ] }
+  ]
+}
+{% endschema %}

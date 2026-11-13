@@ -1,0 +1,255 @@
+{%- comment -%}
+  Browse all products - grey panel with category tiles and cut-out model photos
+  that can pop out above/below the tile (or stay cropped inside it).
+  Add one block per category (Shirts, Trousers, Skirts ...).
+{%- endcomment -%}
+
+<section
+  class="shp-browse"
+  style="
+    --shp-browse-bg: {{ section.settings.panel_color }};
+    --shp-tile-bg: {{ section.settings.tile_color }};
+    --shp-heading: {{ section.settings.heading_color }};
+    --shp-pad-d: {{ section.settings.padding_desktop }}px;
+    --shp-pad-m: {{ section.settings.padding_mobile }}px;
+    --shp-tile-h: {{ section.settings.tile_height }}px;
+    --shp-row-gap: {{ section.settings.row_gap }}px;
+  "
+>
+  <div class="shp-browse__panel">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="shp-browse__title">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    <div class="shp-browse__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign b = block.settings
+          assign span = 4
+          case b.width
+            when 'third'
+              assign span = 4
+            when 'half'
+              assign span = 6
+            when 'two_thirds'
+              assign span = 8
+            when 'full'
+              assign span = 12
+          endcase
+          assign tag = 'a'
+          if b.link == blank
+            assign tag = 'div'
+          endif
+          assign mode = b.image_mode
+        -%}
+
+        <{{ tag }}
+          class="shp-tile shp-tile--{{ mode }} shp-tile--img-{{ b.image_side }}{% if b.center_on_row %} shp-tile--center{% endif %}"
+          style="--span: {{ span }}; --img-h: {{ b.image_height }}%; --img-gap: {{ b.image_edge_gap }}%;"
+          {% if tag == 'a' %}href="{{ b.link }}"{% endif %}
+          {{ block.shopify_attributes }}
+        >
+          <span class="shp-tile__label">{{ b.label | escape }}</span>
+
+          {%- if b.image != blank -%}
+            {%- capture img_html -%}
+              {{
+                b.image
+                | image_url: width: 900
+                | image_tag:
+                  widths: '300, 450, 600, 900',
+                  sizes: '(min-width: 990px) 28vw, 60vw',
+                  loading: 'lazy',
+                  alt: '',
+                  class: 'shp-tile__img'
+              }}
+            {%- endcapture -%}
+            {%- if mode == 'inside' -%}
+              <span class="shp-tile__clip">{{ img_html }}</span>
+            {%- else -%}
+              {{ img_html }}
+            {%- endif -%}
+          {%- endif -%}
+        </{{ tag }}>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .shp-browse {
+    padding: var(--shp-pad-m) 1.5rem;
+  }
+  @media screen and (min-width: 750px) {
+    .shp-browse { padding: var(--shp-pad-d) 3rem; }
+  }
+  .shp-browse__panel {
+    max-width: 112rem;
+    margin: 0 auto;
+    padding: clamp(2.4rem, 4vw, 4.8rem) clamp(1.6rem, 4vw, 4.8rem) clamp(2.8rem, 4.5vw, 5.6rem);
+    background: var(--shp-browse-bg, #eeeeee);
+    border-radius: clamp(1.8rem, 2.4vw, 3rem);
+  }
+  .shp-browse__title {
+    margin: 0 0 clamp(4rem, 5vw, 6rem);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-family: var(--font-body-family, inherit);
+    font-weight: 500;
+    font-size: clamp(2.4rem, 3.4vw, 4.2rem);
+    line-height: 1.1;
+    color: var(--shp-heading, #0e3051);
+  }
+  .shp-browse__grid {
+    --gap: clamp(1.2rem, 2vw, 2.4rem);
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: var(--shp-row-gap, 28px);
+  }
+
+  .shp-tile {
+    position: relative;
+    display: block;
+    grid-column: span 12;
+    min-height: min(var(--shp-tile-h, 220px), 30vw);
+    border-radius: clamp(1.4rem, 1.6vw, 2rem);
+    background: var(--shp-tile-bg, #bfc6d0);
+    color: var(--shp-heading, #0e3051);
+    text-decoration: none;
+    transition: transform 0.25s ease;
+  }
+  @media screen and (min-width: 750px) {
+    .shp-tile { grid-column: span var(--span); }
+    .shp-tile--center {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: calc((100% - 11 * var(--gap)) / 12 * var(--span) + (var(--span) - 1) * var(--gap));
+    }
+  }
+  a.shp-tile:hover { transform: translateY(-4px); }
+  a.shp-tile:focus-visible { outline: 3px solid var(--shp-heading, #0e3051); outline-offset: 3px; }
+
+  .shp-tile__label {
+    position: absolute;
+    top: clamp(1.6rem, 2vw, 2.4rem);
+    left: clamp(1.8rem, 2.4vw, 3rem);
+    z-index: 2;
+    font-size: clamp(1.8rem, 1.8vw, 2.4rem);
+    line-height: 1.2;
+    font-weight: 400;
+  }
+  .shp-tile__label::after {           /* underline grows on hover */
+    content: "";
+    display: block;
+    height: 2px;
+    width: 0;
+    margin-top: 0.4rem;
+    background: currentColor;
+    transition: width 0.25s ease;
+  }
+  a.shp-tile:hover .shp-tile__label::after,
+  a.shp-tile:focus-visible .shp-tile__label::after { width: 100%; }
+
+  /* ---- cut-out photo ---- */
+  .shp-tile__img {
+    position: absolute;
+    z-index: 1;
+    width: auto;
+    max-width: none;
+    height: var(--img-h);
+    pointer-events: none;
+    user-select: none;
+    transition: transform 0.35s ease;
+  }
+  a.shp-tile:hover .shp-tile__img { transform: scale(1.03); }
+
+  /* vertical behaviour */
+  .shp-tile--above .shp-tile__img { bottom: 0; transform-origin: bottom center; }
+  .shp-tile--below .shp-tile__img { top: 0;    transform-origin: top center; }
+  .shp-tile--inside .shp-tile__clip {
+    position: absolute; inset: 0; z-index: 1; overflow: hidden; border-radius: inherit;
+  }
+  .shp-tile--inside .shp-tile__img { top: 0; }
+
+  /* horizontal side */
+  .shp-tile--img-right .shp-tile__img { right: var(--img-gap); }
+  .shp-tile--img-left  .shp-tile__img { left: var(--img-gap); }
+  .shp-tile--img-center .shp-tile__img { left: 50%; margin-left: 0; translate: -50% 0; }
+
+  /* mobile: keep pop-outs modest so tiles never collide */
+  @media screen and (max-width: 749px) {
+    .shp-tile { min-height: 15rem; }
+    .shp-tile__img { height: min(var(--img-h), 128%); }
+    .shp-tile--inside .shp-tile__img { height: min(var(--img-h), 150%); }
+    .shp-tile--img-right .shp-tile__img { right: 4%; }
+    .shp-tile--img-left .shp-tile__img { left: 4%; }
+    .shp-browse__grid { row-gap: 4rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .shp-tile, .shp-tile__img, .shp-tile__label::after { transition: none; }
+    a.shp-tile:hover { transform: none; }
+    a.shp-tile:hover .shp-tile__img { transform: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Shimpin browse all",
+  "tag": "div",
+  "class": "shimpin-browse-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Browse all products" },
+    { "type": "color", "id": "heading_color", "label": "Heading and label colour", "default": "#0E3051" },
+    { "type": "color", "id": "panel_color", "label": "Panel colour", "default": "#EEEEEE" },
+    { "type": "color", "id": "tile_color", "label": "Tile colour", "default": "#BFC6D0" },
+    { "type": "range", "id": "tile_height", "min": 140, "max": 340, "step": 10, "unit": "px", "label": "Tile height (desktop)", "default": 220 },
+    { "type": "range", "id": "row_gap", "min": 8, "max": 100, "step": 4, "unit": "px", "label": "Gap between rows (desktop)", "info": "Photos that pop out below a tile need a little room.", "default": 28 },
+    { "type": "range", "id": "padding_desktop", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Space above and below (desktop)", "default": 32 },
+    { "type": "range", "id": "padding_mobile", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Space above and below (mobile)", "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Category tile",
+      "limit": 6,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Shirts" },
+        { "type": "url", "id": "link", "label": "Link", "info": "Pick the collection, e.g. Shirts." },
+        { "type": "image_picker", "id": "image", "label": "Cut-out photo", "info": "Use a transparent PNG or WebP of the model." },
+        { "type": "select", "id": "width", "label": "Tile width (desktop)", "default": "third", "options": [
+          { "value": "third", "label": "Narrow (1/3)" },
+          { "value": "half", "label": "Half" },
+          { "value": "two_thirds", "label": "Wide (2/3)" },
+          { "value": "full", "label": "Full width" }
+        ] },
+        { "type": "checkbox", "id": "center_on_row", "label": "Centre this tile on its own row", "info": "Use for the Skirts tile on the second row.", "default": false },
+        { "type": "header", "content": "Photo placement" },
+        { "type": "select", "id": "image_mode", "label": "Photo style", "default": "above", "options": [
+          { "value": "above", "label": "Pops out above the tile" },
+          { "value": "below", "label": "Pops out below the tile" },
+          { "value": "inside", "label": "Cropped inside the tile" }
+        ] },
+        { "type": "select", "id": "image_side", "label": "Photo position", "default": "right", "options": [
+          { "value": "left", "label": "Left" },
+          { "value": "center", "label": "Centre" },
+          { "value": "right", "label": "Right" }
+        ] },
+        { "type": "range", "id": "image_height", "min": 80, "max": 220, "step": 5, "unit": "%", "label": "Photo height (% of tile)", "default": 150 },
+        { "type": "range", "id": "image_edge_gap", "min": 0, "max": 40, "step": 1, "unit": "%", "label": "Gap from left/right edge", "default": 8 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shimpin browse all",
+      "blocks": [
+        { "type": "tile", "settings": { "label": "Shirts", "width": "third", "image_mode": "above", "image_side": "right", "image_height": 150 } },
+        { "type": "tile", "settings": { "label": "Trousers", "width": "two_thirds", "image_mode": "below", "image_side": "right", "image_height": 160 } },
+        { "type": "tile", "settings": { "label": "Skirts", "width": "two_thirds", "center_on_row": true, "image_mode": "inside", "image_side": "center", "image_height": 140 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

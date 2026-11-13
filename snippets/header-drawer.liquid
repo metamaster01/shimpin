@@ -137,7 +137,8 @@
                 <div class="menu-drawer__utility-links">
                   {%- if shop.customer_accounts_enabled -%}
                     <div>
-                      <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="menu-drawer__icon link focus-inset h5">
+                      <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}/pages/sign-in?view=sign-in{%- endif -%}" class="menu-drawer__icon link focus-inset h5">
+                      {% comment %} <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="menu-drawer__icon link focus-inset h5"> {% endcomment %}
                         {% render 'icon-account' %}
                         {%- liquid
                           if customer

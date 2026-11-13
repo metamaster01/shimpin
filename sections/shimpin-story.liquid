@@ -1,0 +1,156 @@
+{%- comment -%}
+  The Shimpin Story - soft pink panel, two photos side by side, heading + brand copy
+{%- endcomment -%}
+
+<section
+  class="shp-story"
+  style="
+    --shp-story-bg: {{ section.settings.bg_color }};
+    --shp-story-title: {{ section.settings.title_color }};
+    --shp-story-text: {{ section.settings.text_color }};
+    --shp-pad-d: {{ section.settings.padding_desktop }}px;
+    --shp-pad-m: {{ section.settings.padding_mobile }}px;
+  "
+>
+  <div class="shp-story__inner">
+    {%- if section.settings.title != blank -%}
+      <h2 class="shp-story__title">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+
+    <div class="shp-story__media">
+      {%- for i in (1..2) -%}
+        {%- liquid
+          if i == 1
+            assign img = section.settings.image_1
+          else
+            assign img = section.settings.image_2
+          endif
+          assign focal = img.presentation.focal_point | default: '50% 50%'
+          assign pos_style = 'object-position:' | append: focal
+        -%}
+        <div class="shp-story__img-wrap">
+          {%- if img != blank -%}
+            {{
+              img
+              | image_url: width: 1100
+              | image_tag:
+                widths: '400, 600, 800, 1100',
+                sizes: '(min-width: 1200px) 560px, 50vw',
+                loading: 'lazy',
+                class: 'shp-story__img',
+                style: pos_style
+            }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'shp-story__img shp-story__placeholder' }}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="shp-story__body">
+      {%- if section.settings.subheading != blank -%}
+        <h3 class="shp-story__sub">{{ section.settings.subheading | escape }}</h3>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="shp-story__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <a class="shp-story__btn" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .shp-story {
+    background: var(--shp-story-bg, #fff1f8);
+    padding: var(--shp-pad-m) 1.6rem;
+  }
+  @media screen and (min-width: 750px) {
+    .shp-story { padding: var(--shp-pad-d) 3rem; }
+  }
+  .shp-story__inner { max-width: 98rem; margin: 0 auto; }
+  .shp-story__title {
+    margin: 0 0 clamp(2rem, 3vw, 3.4rem);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-family: var(--font-body-family, inherit);
+    font-weight: 500;
+    font-size: clamp(2.4rem, 3.4vw, 4.2rem);
+    line-height: 1.1;
+    color: var(--shp-story-title, #0e3051);
+  }
+  .shp-story__media {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    overflow: hidden;
+    border-radius: clamp(1.4rem, 1.8vw, 2.2rem);
+  }
+  .shp-story__img-wrap { aspect-ratio: 4 / 5; overflow: hidden; background: #f1d9e6; }
+  @media screen and (min-width: 750px) {
+    .shp-story__img-wrap { aspect-ratio: 4 / 3; }
+  }
+  .shp-story__img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .shp-story__placeholder { fill: #c9a9ba; background: #f1d9e6; }
+
+  .shp-story__body { padding-top: clamp(2rem, 2.6vw, 3rem); max-width: 90rem; }
+  .shp-story__sub {
+    margin: 0 0 clamp(1.6rem, 2vw, 2.4rem);
+    font-family: var(--font-body-family, inherit);
+    font-weight: 600;
+    font-size: clamp(1.7rem, 1.6vw, 2rem);
+    color: var(--shp-story-title, #0e3051);
+  }
+  .shp-story__text,
+  .shp-story__text p {
+    margin: 0;
+    font-size: clamp(1.5rem, 1.45vw, 1.9rem);
+    line-height: 1.55;
+    color: var(--shp-story-text, #5f6f87);
+  }
+  .shp-story__text p + p { margin-top: 0.4rem; }
+  .shp-story__btn {
+    display: inline-block;
+    margin-top: 2.4rem;
+    padding: 1.2rem 2.8rem;
+    border-radius: 999px;
+    background: var(--shp-story-title, #0e3051);
+    color: #fff;
+    font-size: 1.4rem;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .shp-story__btn:hover { opacity: 0.88; }
+  .shp-story__btn:focus-visible { outline: 2px solid var(--shp-story-title, #0e3051); outline-offset: 3px; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Shimpin story",
+  "tag": "div",
+  "class": "shimpin-story-section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "The Shimpin Story" },
+    { "type": "image_picker", "id": "image_1", "label": "Left image" },
+    { "type": "image_picker", "id": "image_2", "label": "Right image" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Made for Women Who Lead." },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Shimpin is a contemporary Indian women's formalwear brand created for bold, self-driven women who lead with confidence, purpose and individuality.</p><p>We believe formalwear is more than looking professional. It's about feeling empowered, capable and confident in every space you step into.</p>"
+    },
+    { "type": "text", "id": "button_label", "label": "Button label (optional)" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FFF1F8" },
+    { "type": "color", "id": "title_color", "label": "Heading colour", "default": "#0E3051" },
+    { "type": "color", "id": "text_color", "label": "Text colour", "default": "#5F6F87" },
+    { "type": "range", "id": "padding_desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Space above and below (desktop)", "default": 56 },
+    { "type": "range", "id": "padding_mobile", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Space above and below (mobile)", "default": 32 }
+  ],
+  "presets": [ { "name": "Shimpin story" } ]
+}
+{% endschema %}

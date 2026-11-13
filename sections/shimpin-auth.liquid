@@ -8,7 +8,7 @@
       {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'eager', alt: section.settings.heading }}
     {%- endif -%}
     {%- if section.settings.caption != blank -%}
-      <p class="shimpin-auth__caption">{{ section.settings.caption | escape }}</p>
+      <p class="shimpin-auth__caption" style="color: navy;">{{ section.settings.caption | escape }}</p>
     {%- endif -%}
   </div>
 

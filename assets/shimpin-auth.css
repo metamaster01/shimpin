@@ -12,6 +12,9 @@
 .shimpin-auth__link { color: #0E3051; }
 
 
+.template-page .shimpin-auth { margin-top: 0; }
+
+
 @media screen and (max-width: 749px) {
   .shimpin-auth { grid-template-columns: 1fr; }
   .shimpin-auth__media { min-height: 24rem; }

@@ -1,0 +1,499 @@
+{%- comment -%}
+  Shimpin hero carousel
+  - Desktop + mobile image per slide, optional text overlay and pill button
+  - Image-only slides (text baked into the banner) still work: if a slide has a link
+    and no text/button, the whole slide becomes clickable
+  - Swipe, arrows, pill dots, autoplay (pauses on hover/touch/tab hidden), reduced-motion safe
+{%- endcomment -%}
+
+{%- liquid
+  assign first = section.blocks.first
+  assign ratio_d = section.settings.ratio_desktop
+  assign ratio_m = section.settings.ratio_mobile
+  if ratio_d == 'adapt'
+    assign ratio_d = 2.4
+    if first != blank and first.settings.image != blank
+      assign ratio_d = first.settings.image.aspect_ratio
+    endif
+  endif
+  if ratio_m == 'adapt'
+    assign ratio_m = ratio_d
+    if first != blank and first.settings.mobile_image != blank
+      assign ratio_m = first.settings.mobile_image.aspect_ratio
+    endif
+  endif
+  assign multi = false
+  if section.blocks.size > 1
+    assign multi = true
+  endif
+-%}
+
+<shimpin-hero
+  class="shp-hero"
+  id="ShimpinHero-{{ section.id }}"
+  style="--shp-ratio-d: {{ ratio_d }}; --shp-ratio-m: {{ ratio_m }}; --shp-max-d: {{ section.settings.max_height_desktop }}px; --shp-max-m: {{ section.settings.max_height_mobile }}px; --shp-accent: {{ section.settings.accent_color }};"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-speed="{{ section.settings.speed }}"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="{{ section.settings.accessibility_label | escape }}"
+>
+  <div class="shp-hero__track" data-track tabindex="-1" aria-live="off">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign b = block.settings
+        assign has_text = false
+        if b.heading != blank or b.text != blank or b.eyebrow != blank or b.button_label != blank
+          assign has_text = true
+        endif
+        assign wrap_link = false
+        if has_text == false and b.link != blank
+          assign wrap_link = true
+        endif
+        assign alt_text = b.image.alt | default: b.heading | strip_html | escape
+        assign loading_attr = 'lazy'
+        assign priority_attr = 'auto'
+        if forloop.first
+          assign loading_attr = 'eager'
+          assign priority_attr = 'high'
+        endif
+        assign focal = b.image.presentation.focal_point | default: '50% 50%'
+        assign pos_style = 'object-position:' | append: focal
+      -%}
+
+      <div
+        class="shp-hero__slide"
+        id="ShimpinSlide-{{ block.id }}"
+        data-slide
+        role="group"
+        aria-roledescription="slide"
+        aria-label="{{ forloop.index }} / {{ forloop.length }}"
+        {{ block.shopify_attributes }}
+      >
+        {%- if wrap_link -%}<a class="shp-hero__fill-link" href="{{ b.link }}" aria-label="{{ alt_text | default: section.settings.accessibility_label }}">{%- endif -%}
+
+        <picture class="shp-hero__media">
+          {%- if b.mobile_image != blank -%}
+            <source media="(max-width: 749px)" srcset="{{ b.mobile_image | image_url: width: 750 }} 750w, {{ b.mobile_image | image_url: width: 1100 }} 1100w" sizes="100vw">
+          {%- endif -%}
+          {%- if b.image != blank -%}
+            {{
+              b.image
+              | image_url: width: 2400
+              | image_tag:
+                widths: '750, 1100, 1500, 1800, 2200, 2400',
+                sizes: '100vw',
+                loading: loading_attr,
+                fetchpriority: priority_attr,
+                alt: alt_text,
+                class: 'shp-hero__img',
+                style: pos_style
+            }}
+          {%- else -%}
+            {{ 'hero-apparel-1' | placeholder_svg_tag: 'shp-hero__img shp-hero__placeholder' }}
+          {%- endif -%}
+        </picture>
+
+        {%- if b.overlay_opacity > 0 -%}
+          <span class="shp-hero__shade" style="opacity: {{ b.overlay_opacity | divided_by: 100.0 }}"></span>
+        {%- endif -%}
+
+        {%- if wrap_link -%}</a>{%- endif -%}
+
+        {%- if has_text -%}
+          <div class="shp-hero__content shp-hero__content--{{ b.text_position }} shp-hero__content--m-{{ b.mobile_text_position }}">
+            <div
+              class="shp-hero__copy"
+              style="--shp-text: {{ b.text_color }}; --shp-btn-bg: {{ b.button_bg }}; --shp-btn-text: {{ b.button_text }};"
+            >
+              {%- if b.eyebrow != blank -%}
+                <p class="shp-hero__eyebrow"><span>{{ b.eyebrow | escape }}</span></p>
+              {%- endif -%}
+              {%- if b.heading != blank -%}
+                {%- if forloop.first -%}
+                  <h1 class="shp-hero__heading">{{ b.heading }}</h1>
+                {%- else -%}
+                  <h2 class="shp-hero__heading">{{ b.heading }}</h2>
+                {%- endif -%}
+              {%- endif -%}
+              {%- if b.text != blank -%}
+                <p class="shp-hero__text">{{ b.text | escape | newline_to_br }}</p>
+              {%- endif -%}
+              {%- if b.button_label != blank -%}
+                <a class="shp-hero__btn" href="{{ b.link | default: '#' }}">
+                  <span>{{ b.button_label | escape }}</span>
+                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if multi -%}
+    {%- if section.settings.show_arrows -%}
+      <button type="button" class="shp-hero__arrow shp-hero__arrow--prev" data-prev aria-label="Previous slide">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 4 6.5 10l6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button type="button" class="shp-hero__arrow shp-hero__arrow--next" data-next aria-label="Next slide">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="m7.5 4 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    {%- endif -%}
+
+    <div class="shp-hero__controls">
+      {%- if section.settings.show_dots -%}
+        <div class="shp-hero__dots" role="tablist" aria-label="Choose slide">
+          {%- for block in section.blocks -%}
+            <button type="button" class="shp-hero__dot" data-dot role="tab" aria-label="Slide {{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"></button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.autoplay -%}
+        <button type="button" class="shp-hero__pause" data-pause aria-label="Pause slideshow" aria-pressed="false">
+          <svg class="shp-i-pause" aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><path fill="currentColor" d="M2 1h3v10H2zM7 1h3v10H7z"/></svg>
+          <svg class="shp-i-play" aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><path fill="currentColor" d="M3 1.5v9l7.5-4.5z"/></svg>
+        </button>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</shimpin-hero>
+
+{% stylesheet %}
+  .shp-hero { position: relative; overflow: hidden; background: #0e3051; }
+  .shp-hero__track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .shp-hero__track::-webkit-scrollbar { display: none; }
+  .shp-hero__slide {
+    position: relative;
+    flex: 0 0 100%;
+    min-width: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    aspect-ratio: var(--shp-ratio-m);
+    max-height: var(--shp-max-m, 520px);
+  }
+  @media screen and (min-width: 750px) {
+    .shp-hero__slide { aspect-ratio: var(--shp-ratio-d); max-height: var(--shp-max-d, 560px); }
+  }
+  .shp-hero__media,
+  .shp-hero__fill-link { position: absolute; inset: 0; display: block; }
+  .shp-hero__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shp-hero__placeholder { background: #dfe4ea; fill: #9aa7b5; }
+  .shp-hero__shade { position: absolute; inset: 0; background: #000; pointer-events: none; z-index: 1; }
+
+  /* ---- text overlay ---- */
+  .shp-hero__content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    padding: 2rem clamp(2rem, 6vw, 9rem);
+    pointer-events: none;
+  }
+  .shp-hero__content--left { justify-content: flex-start; text-align: left; }
+  .shp-hero__content--center { justify-content: center; text-align: center; }
+  .shp-hero__content--right { justify-content: flex-end; text-align: right; }
+  .shp-hero__copy {
+    pointer-events: auto;
+    max-width: 56rem;
+    color: var(--shp-text, #fff);
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+  .shp-hero__content--left .shp-hero__copy { align-items: flex-start; }
+  .shp-hero__content--center .shp-hero__copy { align-items: center; }
+  .shp-hero__content--right .shp-hero__copy { align-items: flex-end; }
+
+  .shp-hero__eyebrow {
+    display: flex; align-items: center; gap: 1.2rem; margin: 0;
+    font-size: clamp(1.4rem, 1.5vw, 1.9rem); letter-spacing: 0.04em; opacity: 0.9;
+  }
+  .shp-hero__eyebrow::before, .shp-hero__eyebrow::after {
+    content: ""; width: clamp(2.4rem, 4vw, 6rem); height: 1px; background: currentColor; opacity: 0.6;
+  }
+  .shp-hero__content--left .shp-hero__eyebrow::before { display: none; }
+  .shp-hero__content--right .shp-hero__eyebrow::after { display: none; }
+
+  .shp-hero__heading {
+    margin: 0;
+    font-family: var(--font-heading-family, Georgia, serif);
+    font-weight: 400;
+    font-size: clamp(3.2rem, 5.2vw, 7.2rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: inherit;
+  }
+  .shp-hero__heading em { font-style: italic; }
+  .shp-hero__text {
+    margin: 0; max-width: 40rem;
+    font-size: clamp(1.5rem, 1.35vw, 1.9rem); line-height: 1.5; color: inherit; opacity: 0.92;
+  }
+  .shp-hero__btn {
+    display: inline-flex; align-items: center; gap: 1rem;
+    margin-top: 0.8rem;
+    padding: 1.3rem 2.6rem;
+    border-radius: 999px;
+    background: var(--shp-btn-bg, #ede5dc);
+    color: var(--shp-btn-text, #0e3051);
+    font-size: 1.4rem; font-weight: 500; letter-spacing: 0.02em; text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .shp-hero__btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.18); }
+  .shp-hero__btn svg { transition: transform 0.2s ease; }
+  .shp-hero__btn:hover svg { transform: translateX(3px); }
+  .shp-hero__btn:focus-visible, .shp-hero__dot:focus-visible,
+  .shp-hero__arrow:focus-visible, .shp-hero__pause:focus-visible,
+  .shp-hero__fill-link:focus-visible { outline: 2px solid #fff; outline-offset: 3px; box-shadow: 0 0 0 4px #0e3051; }
+
+  @media screen and (max-width: 749px) {
+    .shp-hero__content { padding: 2.4rem 2rem 5rem; }
+    .shp-hero__content--m-top { align-items: flex-start; padding-top: 3rem; }
+    .shp-hero__content--m-center { align-items: center; }
+    .shp-hero__content--m-bottom { align-items: flex-end; }
+    .shp-hero__content { justify-content: center; text-align: center; }
+    .shp-hero__copy { align-items: center !important; gap: 1.2rem; }
+    .shp-hero__content--left .shp-hero__eyebrow::before,
+    .shp-hero__content--right .shp-hero__eyebrow::after { display: block; }
+    .shp-hero__btn { padding: 1.1rem 2.2rem; }
+  }
+
+  /* ---- controls ---- */
+  .shp-hero__controls {
+    position: absolute; left: 0; right: 0; bottom: 1.8rem; z-index: 3;
+    display: flex; justify-content: center; align-items: center; gap: 1.2rem;
+    pointer-events: none;
+  }
+  .shp-hero__dots { display: flex; align-items: center; gap: 0.6rem; pointer-events: auto; }
+  .shp-hero__dot {
+    position: relative; width: 0.8rem; height: 0.8rem; padding: 0; border: 0; border-radius: 999px;
+    background: rgba(255,255,255,0.6); cursor: pointer;
+    transition: width 0.3s ease, background-color 0.3s ease;
+  }
+  .shp-hero__dot::after { content: ""; position: absolute; inset: -1rem -0.4rem; } /* bigger tap area */
+  .shp-hero__dot[aria-selected="true"] { width: 2.8rem; background: var(--shp-accent, #e6007e); }
+  .shp-hero__pause {
+    pointer-events: auto; width: 2.8rem; height: 2.8rem; padding: 0; border: 0; border-radius: 50%;
+    display: grid; place-items: center; cursor: pointer;
+    background: rgba(255,255,255,0.85); color: #0e3051;
+  }
+  .shp-hero__pause .shp-i-play { display: none; }
+  .shp-hero__pause[aria-pressed="true"] .shp-i-play { display: block; }
+  .shp-hero__pause[aria-pressed="true"] .shp-i-pause { display: none; }
+
+  .shp-hero__arrow {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+    width: 4.6rem; height: 4.6rem; border: 0; border-radius: 50%; padding: 0;
+    display: none; place-items: center; cursor: pointer;
+    background: rgba(255,255,255,0.9); color: #0e3051;
+    box-shadow: 0 4px 14px rgba(14,48,81,0.2);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  .shp-hero__arrow:hover { background: #fff; transform: translateY(-50%) scale(1.05); }
+  .shp-hero__arrow--prev { left: 2rem; }
+  .shp-hero__arrow--next { right: 2rem; }
+  @media screen and (min-width: 990px) { .shp-hero__arrow { display: grid; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shp-hero__dot, .shp-hero__btn, .shp-hero__btn svg, .shp-hero__arrow { transition: none; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('shimpin-hero')) {
+    customElements.define('shimpin-hero', class ShimpinHero extends HTMLElement {
+      connectedCallback() {
+        this.track = this.querySelector('[data-track]');
+        this.slides = Array.from(this.querySelectorAll('[data-slide]'));
+        this.dots = Array.from(this.querySelectorAll('[data-dot]'));
+        this.pauseBtn = this.querySelector('[data-pause]');
+        this.index = 0;
+        this.hold = { user: false, hover: false, focus: false, touch: false, view: false, tab: false, editor: false };
+        this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        this.autoplay = this.dataset.autoplay === 'true' && this.slides.length > 1 && !this.reduced;
+        this.speed = (parseInt(this.dataset.speed, 10) || 5) * 1000;
+        if (this.slides.length < 2) return;
+
+        this.querySelector('[data-prev]')?.addEventListener('click', () => this.go(this.index - 1));
+        this.querySelector('[data-next]')?.addEventListener('click', () => this.go(this.index + 1));
+        this.dots.forEach((d, i) => d.addEventListener('click', () => this.go(i)));
+        this.pauseBtn?.addEventListener('click', () => this.togglePause());
+
+        // keep index in sync when the user swipes; restart the timer afterwards
+        this.track.addEventListener('scroll', () => {
+          cancelAnimationFrame(this.raf);
+          this.raf = requestAnimationFrame(() => this.sync());
+        }, { passive: true });
+
+        this.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') this.go(this.index - 1);
+          if (e.key === 'ArrowRight') this.go(this.index + 1);
+        });
+
+        // mouse hover only (touch devices fire pointerenter on tap and never leave)
+        this.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') this.set('hover', true); });
+        this.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') this.set('hover', false); });
+        this.addEventListener('focusin', (e) => { if (e.target.matches(':focus-visible')) this.set('focus', true); });
+        this.addEventListener('focusout', () => this.set('focus', false));
+        this.addEventListener('touchstart', () => this.set('touch', true), { passive: true });
+        const endTouch = () => { clearTimeout(this.touchT); this.touchT = setTimeout(() => this.set('touch', false), 1200); };
+        this.addEventListener('touchend', endTouch, { passive: true });
+        this.addEventListener('touchcancel', endTouch, { passive: true });
+
+        this.onVisibility = () => this.set('tab', document.hidden);
+        document.addEventListener('visibilitychange', this.onVisibility);
+
+        this.hold.view = true; // until the observer says it's visible
+        if ('IntersectionObserver' in window) {
+          this.io = new IntersectionObserver(([entry]) => this.set('view', !entry.isIntersecting), { threshold: 0.2 });
+          this.io.observe(this);
+        } else {
+          this.hold.view = false;
+        }
+
+        // theme editor
+        this.addEventListener('shopify:block:select', (e) => {
+          const i = this.slides.indexOf(e.target.closest('[data-slide]'));
+          this.set('editor', true);
+          if (i > -1) this.go(i, 'auto');
+        });
+        this.addEventListener('shopify:block:deselect', () => this.set('editor', false));
+
+        this.update();
+        this.schedule();
+      }
+
+      disconnectedCallback() {
+        clearTimeout(this.timer);
+        clearTimeout(this.touchT);
+        this.io?.disconnect();
+        document.removeEventListener('visibilitychange', this.onVisibility);
+      }
+
+      set(key, value) { this.hold[key] = value; this.schedule(); }
+
+      get held() { return Object.values(this.hold).some(Boolean); }
+
+      // one self-correcting timer: always restarts a full interval after any change
+      schedule() {
+        clearTimeout(this.timer);
+        if (!this.autoplay || this.held) return;
+        this.timer = setTimeout(() => this.go(this.index + 1, undefined, true), this.speed);
+      }
+
+      sync() {
+        const w = this.track.clientWidth;
+        if (!w) return;
+        const i = Math.round(this.track.scrollLeft / w);
+        if (i !== this.index && i >= 0 && i < this.slides.length) {
+          this.index = i;
+          this.update();
+          this.schedule();
+        }
+      }
+
+      update() {
+        this.slides.forEach((s, i) => {
+          const active = i === this.index;
+          s.toggleAttribute('inert', !active);
+          s.setAttribute('aria-hidden', active ? 'false' : 'true');
+        });
+        this.dots.forEach((d, i) => d.setAttribute('aria-selected', i === this.index ? 'true' : 'false'));
+      }
+
+      go(i, behavior, auto = false) {
+        const n = this.slides.length;
+        const wrapped = i >= n || i < 0;
+        this.index = (i + n) % n;
+        // jump straight back to the first slide instead of whizzing past all the others
+        const b = behavior || (this.reduced || wrapped ? 'auto' : 'smooth');
+        this.track.scrollTo({ left: this.index * this.track.clientWidth, behavior: b });
+        this.update();
+        this.schedule();
+      }
+
+      togglePause() {
+        const paused = !this.hold.user;
+        this.set('user', paused);
+        this.pauseBtn.setAttribute('aria-pressed', String(paused));
+        this.pauseBtn.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
+      }
+    });
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Shimpin hero",
+  "tag": "section",
+  "class": "shimpin-hero-section",
+  "settings": [
+    { "type": "header", "content": "Banner height" },
+    { "type": "select", "id": "ratio_desktop", "label": "Desktop shape", "default": "21 / 8", "options": [
+      { "value": "3 / 1", "label": "Extra slim (3:1)" },
+      { "value": "21 / 8", "label": "Slim (2.6:1)" },
+      { "value": "2 / 1", "label": "Standard (2:1)" },
+      { "value": "16 / 9", "label": "Tall (16:9)" },
+      { "value": "adapt", "label": "Match first image" }
+    ] },
+    { "type": "range", "id": "max_height_desktop", "min": 280, "max": 800, "step": 20, "unit": "px", "label": "Desktop max height", "default": 560 },
+    { "type": "select", "id": "ratio_mobile", "label": "Mobile shape", "default": "5 / 4", "options": [
+      { "value": "3 / 2", "label": "Slim (3:2)" },
+      { "value": "5 / 4", "label": "Standard (5:4)" },
+      { "value": "1 / 1", "label": "Square" },
+      { "value": "4 / 5", "label": "Tall (4:5)" },
+      { "value": "adapt", "label": "Match first image" }
+    ] },
+    { "type": "range", "id": "max_height_mobile", "min": 240, "max": 640, "step": 20, "unit": "px", "label": "Mobile max height", "default": 440 },
+    { "type": "header", "content": "Behaviour" },
+    { "type": "checkbox", "id": "autoplay", "label": "Auto-rotate slides", "default": true },
+    { "type": "range", "id": "speed", "min": 3, "max": 10, "step": 1, "unit": "s", "label": "Change slides every", "default": 5 },
+    { "type": "checkbox", "id": "show_arrows", "label": "Show arrows (desktop)", "default": true },
+    { "type": "checkbox", "id": "show_dots", "label": "Show pagination dots", "default": true },
+    { "type": "color", "id": "accent_color", "label": "Active dot colour", "default": "#E6007E" },
+    { "type": "header", "content": "Accessibility" },
+    { "type": "text", "id": "accessibility_label", "label": "Carousel description", "default": "Shimpin featured collections" }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "limit": 6,
+      "settings": [
+        { "type": "header", "content": "Images" },
+        { "type": "image_picker", "id": "image", "label": "Desktop image", "info": "Recommended 2400 × 1140 px. All slides crop to the first slide's shape." },
+        { "type": "image_picker", "id": "mobile_image", "label": "Mobile image", "info": "Recommended 1080 × 1350 px (4:5). Falls back to the desktop image." },
+        { "type": "range", "id": "overlay_opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "label": "Dark overlay", "default": 0 },
+        { "type": "header", "content": "Text (optional)" },
+        { "type": "text", "id": "eyebrow", "label": "Small line above heading" },
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "info": "Use italic for the second line, like the design." },
+        { "type": "textarea", "id": "text", "label": "Subtext" },
+        { "type": "select", "id": "text_position", "label": "Text position (desktop)", "default": "center", "options": [
+          { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }
+        ] },
+        { "type": "select", "id": "mobile_text_position", "label": "Text position (mobile)", "default": "bottom", "options": [
+          { "value": "top", "label": "Top" }, { "value": "center", "label": "Middle" }, { "value": "bottom", "label": "Bottom" }
+        ] },
+        { "type": "color", "id": "text_color", "label": "Text colour", "default": "#F3EEE8" },
+        { "type": "header", "content": "Button / link" },
+        { "type": "text", "id": "button_label", "label": "Button label" },
+        { "type": "url", "id": "link", "label": "Link", "info": "If there is no text or button, the whole slide becomes a link." },
+        { "type": "color", "id": "button_bg", "label": "Button colour", "default": "#EDE5DC" },
+        { "type": "color", "id": "button_text", "label": "Button text colour", "default": "#0E3051" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Shimpin hero", "blocks": [ { "type": "slide" }, { "type": "slide" } ] }
+  ]
+}
+{% endschema %}

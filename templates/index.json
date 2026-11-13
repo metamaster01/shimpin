@@ -1,3 +1,1206 @@
+// /*
+//  * ------------------------------------------------------------
+//  * IMPORTANT: The contents of this file are auto-generated.
+//  *
+//  * This file may be updated by the Shopify admin theme editor
+//  * or related systems. Please exercise caution as any changes
+//  * made to this file may be overwritten.
+//  * ------------------------------------------------------------
+//  */
+// {
+//   "sections": {
+//     "6492533a-9ed1-4828-a275-e6479417dc49": {
+//       "type": "slideshow",
+//       "blocks": {
+//         "template--15842706555055__6492533a-9ed1-4828-a275-e6479417dc49-16764779592660d88a-0": {
+//           "type": "slide",
+//           "settings": {
+//             "image": "shopify://shop_images/Shimpin_Web_Banner_1_jpg.jpg",
+//             "subtitle": "",
+//             "subtitle_color": "#222222",
+//             "section_subtitle_scale": 100,
+//             "title": "",
+//             "caption_size": "h1",
+//             "title_color": "#222222",
+//             "section_heading_scale": 100,
+//             "text": "",
+//             "text_color": "#222222",
+//             "section_description_scale": 129,
+//             "button_label": "",
+//             "link": "shopify://pages/banner-scroll-slider",
+//             "banner_link": false,
+//             "btn_bg_color": "#222222",
+//             "btn_border_color": "#222222",
+//             "btn_text_color": "#ffffff",
+//             "btn_bg_color_hover": "#ffffff",
+//             "btn_border_color_hover": "#222222",
+//             "btn_text_color_hover": "#222222",
+//             "zmz_btn_size": "zmz-btn-lg",
+//             "box_align": "middle-left",
+//             "show_text_box": true,
+//             "banner_box_width": 54.5,
+//             "text_box_opacity": 0,
+//             "text_alignment": "center",
+//             "image_overlay_opacity": 0,
+//             "color_scheme": "background-1",
+//             "text_alignment_mobile": "center",
+//             "margin_title": 1,
+//             "margin_subtitle": 0,
+//             "margin_text": 1,
+//             "margin_btn": 3
+//           }
+//         },
+//         "slide_innBLW": {
+//           "type": "slide",
+//           "settings": {
+//             "image": "shopify://shop_images/Shimpin_Web_Banner_2_jpg.jpg",
+//             "subtitle": "",
+//             "subtitle_color": "#222222",
+//             "section_subtitle_scale": 100,
+//             "title": "",
+//             "caption_size": "h1",
+//             "title_color": "#222222",
+//             "section_heading_scale": 100,
+//             "text": "",
+//             "text_color": "#222222",
+//             "section_description_scale": 129,
+//             "button_label": "",
+//             "link": "shopify://pages/banner-scroll-slider",
+//             "banner_link": false,
+//             "btn_bg_color": "#222222",
+//             "btn_border_color": "#222222",
+//             "btn_text_color": "#ffffff",
+//             "btn_bg_color_hover": "#ffffff",
+//             "btn_border_color_hover": "#222222",
+//             "btn_text_color_hover": "#222222",
+//             "zmz_btn_size": "zmz-btn-lg",
+//             "box_align": "middle-left",
+//             "show_text_box": true,
+//             "banner_box_width": 54.5,
+//             "text_box_opacity": 0,
+//             "text_alignment": "center",
+//             "image_overlay_opacity": 0,
+//             "color_scheme": "background-1",
+//             "text_alignment_mobile": "center",
+//             "margin_title": 1,
+//             "margin_subtitle": 0,
+//             "margin_text": 1,
+//             "margin_btn": 3
+//           }
+//         },
+//         "slide_qQQQYF": {
+//           "type": "slide",
+//           "settings": {
+//             "image": "shopify://shop_images/Shimpin_Web_Banner_3_jpg.jpg",
+//             "subtitle": "",
+//             "subtitle_color": "#222222",
+//             "section_subtitle_scale": 100,
+//             "title": "",
+//             "caption_size": "h1",
+//             "title_color": "#222222",
+//             "section_heading_scale": 100,
+//             "text": "",
+//             "text_color": "#222222",
+//             "section_description_scale": 129,
+//             "button_label": "",
+//             "link": "shopify://pages/banner-scroll-slider",
+//             "banner_link": false,
+//             "btn_bg_color": "#222222",
+//             "btn_border_color": "#222222",
+//             "btn_text_color": "#ffffff",
+//             "btn_bg_color_hover": "#ffffff",
+//             "btn_border_color_hover": "#222222",
+//             "btn_text_color_hover": "#222222",
+//             "zmz_btn_size": "zmz-btn-lg",
+//             "box_align": "middle-left",
+//             "show_text_box": true,
+//             "banner_box_width": 54.5,
+//             "text_box_opacity": 0,
+//             "text_alignment": "center",
+//             "image_overlay_opacity": 0,
+//             "color_scheme": "background-1",
+//             "text_alignment_mobile": "center",
+//             "margin_title": 1,
+//             "margin_subtitle": 0,
+//             "margin_text": 1,
+//             "margin_btn": 3
+//           }
+//         }
+//       },
+//       "block_order": [
+//         "template--15842706555055__6492533a-9ed1-4828-a275-e6479417dc49-16764779592660d88a-0",
+//         "slide_innBLW",
+//         "slide_qQQQYF"
+//       ],
+//       "settings": {
+//         "layout": "full_bleed",
+//         "slide_height": "adapt_image",
+//         "slider_visual": "dots",
+//         "auto_rotate": true,
+//         "change_slides_speed": 3,
+//         "show_text_below": false,
+//         "accessibility_info": ""
+//       }
+//     },
+//     "0d16ca77-c839-46d3-b918-6d6432ffa17b": {
+//       "type": "zmz-featured-collection",
+//       "blocks": {
+//         "bad4e23e-c6c2-42f6-9b0a-23f16e6e490b": {
+//           "type": "collection_tab",
+//           "settings": {
+//             "block_collection_title": "",
+//             "block_title": "",
+//             "collection": "spotlight",
+//             "card_design": "design-3",
+//             "card_text_alignment": "center",
+//             "image_ratio": "adapt",
+//             "image_padding": 0,
+//             "bg_wrap_img_color": "rgba(0,0,0,0)",
+//             "bg_border_img_color": "#ffffff",
+//             "show_secondary_image": false,
+//             "badge_card_toggle": true,
+//             "show_vendor": true,
+//             "show_rating": true,
+//             "enable_quick_add": false,
+//             "enable_quick_view": true,
+//             "show_compare": false,
+//             "show_wishlist": false,
+//             "show_color_link": false,
+//             "show_countdown": false
+//           }
+//         }
+//       },
+//       "block_order": [
+//         "bad4e23e-c6c2-42f6-9b0a-23f16e6e490b"
+//       ],
+//       "settings": {
+//         "box_type": "full_width",
+//         "section_width": 1170,
+//         "section_fluid_width": 1880,
+//         "title": "Spotlight – Designed to Command",
+//         "section_heading_scale": 100,
+//         "subtitle": "",
+//         "section_subtitle_scale": 100,
+//         "description": "Designed to command attention — before you speak.",
+//         "customInfo": "",
+//         "section_description_scale": 100,
+//         "description_style": "body",
+//         "heading_alignment": "center",
+//         "inverted": false,
+//         "products_to_show": 4,
+//         "columns_desktop": 4,
+//         "spacing_grid_horizontal": 15,
+//         "full_width": true,
+//         "show_view_all": true,
+//         "view_all_btn_text": "View all",
+//         "view_all_style": "solid",
+//         "use_tabs": false,
+//         "enable_desktop_slider": true,
+//         "carousel_control_type": "navigation",
+//         "design_type": "type_1",
+//         "color_scheme": "background-1",
+//         "customColor": false,
+//         "bg_color": "rgba(0,0,0,0)",
+//         "container_color_scheme": "background-1",
+//         "section_custom_color": false,
+//         "bg_section_color": "rgba(0,0,0,0)",
+//         "bg_color_opacity": 0.1,
+//         "columns_mobile": "2",
+//         "swipe_on_mobile": false,
+//         "desktop_section_padding": "3rem 3rem 3rem 3rem",
+//         "desktopContainerPadding": "3rem 3rem 1rem 3rem",
+//         "mobile_section_padding": "1rem 1rem 1rem 1rem",
+//         "mobileContainerPadding": "1rem 1rem 1rem 1rem"
+//       }
+//     },
+//     "zmz_featured_collection_GTPt4B": {
+//       "type": "zmz-featured-collection",
+//       "blocks": {
+//         "collection_tab_N3eDfj": {
+//           "type": "collection_tab",
+//           "settings": {
+//             "block_collection_title": "",
+//             "block_title": "",
+//             "collection": "trousers",
+//             "card_design": "design-3",
+//             "card_text_alignment": "center",
+//             "image_ratio": "adapt",
+//             "image_padding": 0,
+//             "bg_wrap_img_color": "rgba(0,0,0,0)",
+//             "bg_border_img_color": "#ffffff",
+//             "show_secondary_image": false,
+//             "badge_card_toggle": true,
+//             "show_vendor": true,
+//             "show_rating": true,
+//             "enable_quick_add": false,
+//             "enable_quick_view": true,
+//             "show_compare": false,
+//             "show_wishlist": false,
+//             "show_color_link": false,
+//             "show_countdown": false
+//           }
+//         }
+//       },
+//       "block_order": [
+//         "collection_tab_N3eDfj"
+//       ],
+//       "settings": {
+//         "box_type": "full_width",
+//         "section_width": 1170,
+//         "section_fluid_width": 1880,
+//         "title": "Premium Trousers Collection",
+//         "section_heading_scale": 100,
+//         "subtitle": "",
+//         "section_subtitle_scale": 100,
+//         "description": "Smart fits. Sharp looks.",
+//         "customInfo": "",
+//         "section_description_scale": 100,
+//         "description_style": "body",
+//         "heading_alignment": "center",
+//         "inverted": false,
+//         "products_to_show": 8,
+//         "columns_desktop": 4,
+//         "spacing_grid_horizontal": 15,
+//         "full_width": true,
+//         "show_view_all": true,
+//         "view_all_btn_text": "View all",
+//         "view_all_style": "solid",
+//         "use_tabs": false,
+//         "enable_desktop_slider": true,
+//         "carousel_control_type": "navigation",
+//         "design_type": "type_1",
+//         "color_scheme": "background-1",
+//         "customColor": false,
+//         "bg_color": "rgba(0,0,0,0)",
+//         "container_color_scheme": "background-1",
+//         "section_custom_color": false,
+//         "bg_section_color": "rgba(0,0,0,0)",
+//         "bg_color_opacity": 0.1,
+//         "columns_mobile": "2",
+//         "swipe_on_mobile": false,
+//         "desktop_section_padding": "3rem 3rem 3rem 3rem",
+//         "desktopContainerPadding": "3rem 3rem 1rem 3rem",
+//         "mobile_section_padding": "1rem 1rem 1rem 1rem",
+//         "mobileContainerPadding": "1rem 1rem 1rem 1rem"
+//       }
+//     },
+//     "1771348970219ad1b5": {
+//       "type": "apps",
+//       "blocks": {
+//         "judge_me_reviews_testimonials_carousel_fKttwy": {
+//           "type": "shopify://apps/judge-me-reviews/blocks/testimonials_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+//           "settings": {
+//             "show_sample_reviews": true,
+//             "reviews_selection": "all",
+//             "products": [],
+//             "star_rating": "all",
+//             "max_reviews": 20,
+//             "quote_marks_size": "small",
+//             "product_name_text_size": "small",
+//             "verified_badge_style": "icon",
+//             "card_height": "medium",
+//             "text_size": "small",
+//             "stars_size": "medium",
+//             "arrows_position": "bottom",
+//             "max_width": 1100,
+//             "corner_styling": "soft",
+//             "quote_marks_style": "serif",
+//             "card_color": "#f9f9f9",
+//             "stars_and_quote_marks_color": "#108474",
+//             "text_color": "#000000",
+//             "arrows_color": "#000000",
+//             "show_border": false,
+//             "border_color": "#108474",
+//             "show_drop_shadow": false,
+//             "transition_speed": 5,
+//             "header_text": "Customers are saying",
+//             "show_average_rating": true
+//           }
+//         }
+//       },
+//       "block_order": [
+//         "judge_me_reviews_testimonials_carousel_fKttwy"
+//       ],
+//       "settings": {
+//         "include_margins": true
+//       }
+//     },
+//     "e25cfafd-d27a-465b-a830-cc36da8a2e15": {
+//       "type": "zmz-icon-text",
+//       "blocks": {
+//         "template--14900282556458__e25cfafd-d27a-465b-a830-cc36da8a2e15-1678788489ff19caae-0": {
+//           "type": "column",
+//           "settings": {
+//             "image_ratio": "adapt",
+//             "image_width": 4,
+//             "icon-layout": "vertical",
+//             "icon_1": "truck",
+//             "svgColor": "#222222",
+//             "customHtml": "",
+//             "title": "Free delivery",
+//             "title_color": "#222222",
+//             "section_heading_scale": 67,
+//             "text": "<p>Free shipping across India</p>",
+//             "text_color": "#7b7b7b",
+//             "section_description_scale": 120,
+//             "bg_border_img_color": "rgba(0,0,0,0)",
+//             "image_padding": 0,
+//             "info_padding": "1rem 1rem 1rem 0rem",
+//             "link_label": "",
+//             "link": "",
+//             "info_padding_mob": "1rem 1rem 1rem 0rem"
+//           }
+//         },
+//         "template--14900282556458__e25cfafd-d27a-465b-a830-cc36da8a2e15-1678788489ff19caae-1": {
+//           "type": "column",
+//           "settings": {
+//             "image_ratio": "adapt",
+//             "image_width": 4,
+//             "icon-layout": "vertical",
+//             "icon_1": "wallet",
+//             "svgColor": "#121212",
+//             "customHtml": "",
+//             "title": "100% Payment Secure",
+//             "title_color": "#222222",
+//             "section_heading_scale": 67,
+//             "text": "<p>COD & prepaid payments </p>",
+//             "text_color": "#7b7b7b",
+//             "section_description_scale": 119,
+//             "bg_border_img_color": "rgba(0,0,0,0)",
+//             "image_padding": 0,
+//             "info_padding": "1rem 1rem 1rem 0rem",
+//             "link_label": "",
+//             "link": "",
+//             "info_padding_mob": "1rem 1rem 1rem 0rem"
+//           }
+//         },
+//         "template--14900282556458__e25cfafd-d27a-465b-a830-cc36da8a2e15-1678788489ff19caae-2": {
+//           "type": "column",
+//           "settings": {
+//             "image_ratio": "adapt",
+//             "image_width": 4,
+//             "icon-layout": "vertical",
+//             "icon_1": "rotate_left",
+//             "svgColor": "#121212",
+//             "customHtml": "",
+//             "title": "7 Days Easy Return",
+//             "title_color": "#222222",
+//             "section_heading_scale": 67,
+//             "text": "<p>Hassle-free return policy</p>",
+//             "text_color": "#7b7b7b",
+//             "section_description_scale": 119,
+//             "bg_border_img_color": "rgba(0,0,0,0)",
+//             "image_padding": 0,
+//             "info_padding": "1rem 1rem 1rem 0rem",
+//             "link_label": "",
+//             "link": "",
+//             "info_padding_mob": "1rem 1rem 1rem 0rem"
+//           }
+//         },
+//         "e3f1d2b5-33e6-49b0-8a08-04471da28e07": {
+//           "type": "column",
+//           "settings": {
+//             "image_ratio": "adapt",
+//             "image_width": 4,
+//             "icon-layout": "vertical",
+//             "icon_1": "support",
+//             "svgColor": "#121212",
+//             "customHtml": "",
+//             "title": "Customer Support 24/7",
+//             "title_color": "#222222",
+//             "section_heading_scale": 67,
+//             "text": "<p>We’re here to help anytime<br/></p>",
+//             "text_color": "#7b7b7b",
+//             "section_description_scale": 119,
+//             "bg_border_img_color": "rgba(0,0,0,0)",
+//             "image_padding": 0,
+//             "info_padding": "1rem 1rem 1rem 0rem",
+//             "link_label": "",
+//             "link": "",
+//             "info_padding_mob": "1rem 1rem 1rem 0rem"
+//           }
+//         }
+//       },
+//       "block_order": [
+//         "template--14900282556458__e25cfafd-d27a-465b-a830-cc36da8a2e15-1678788489ff19caae-0",
+//         "template--14900282556458__e25cfafd-d27a-465b-a830-cc36da8a2e15-1678788489ff19caae-1",
+//         "template--14900282556458__e25cfafd-d27a-465b-a830-cc36da8a2e15-1678788489ff19caae-2",
+//         "e3f1d2b5-33e6-49b0-8a08-04471da28e07"
+//       ],
+//       "settings": {
+//         "box_type": "box",
+//         "section_width": 1200,
+//         "section_fluid_width": 1880,
+//         "title": "",
+//         "section_heading_scale": 100,
+//         "subtitle": "",
+//         "section_subtitle_scale": 100,
+//         "description": "",
+//         "section_description_scale": 100,
+//         "heading_alignment": "center",
+//         "inverted": false,
+//         "columns_desktop": 4,
+//         "spacing_grid_horizontal": 30,
+//         "column_alignment": "center",
+//         "image_vertical_alignment": "middle",
+//         "off_carousel_counter": false,
+//         "nav_style_type": "type_2",
+//         "enable_desktop_slider": true,
+//         "caption_full_width": false,
+//         "background_style": "primary",
+//         "button_label": "",
+//         "button_link": "",
+//         "color_scheme": "background-1",
+//         "customColor": false,
+//         "bg_color": "",
+//         "container_color_scheme": "background-1",
+//         "section_custom_color": false,
+//         "bg_section_color": "",
+//         "bg_color_opacity": 0.1,
+//         "columns_mobile": "2",
+//         "swipe_on_mobile": false,
+//         "desktop_section_padding": "2rem 2rem 2rem 2rem",
+//         "desktopContainerPadding": "0rem 1.5rem 3rem 1.5rem",
+//         "mobile_section_padding": "0rem 1.5rem 0rem 1.5rem",
+//         "mobileContainerPadding": "0rem 1rem 0rem 1rem"
+//       }
+//     }
+//   },
+//   "order": [
+//     "6492533a-9ed1-4828-a275-e6479417dc49",
+//     "0d16ca77-c839-46d3-b918-6d6432ffa17b",
+//     "zmz_featured_collection_GTPt4B",
+//     "1771348970219ad1b5",
+//     "e25cfafd-d27a-465b-a830-cc36da8a2e15"
+//   ]
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+// {
+//   "sections": {
+//     "6492533a-9ed1-4828-a275-e6479417dc49": {
+//       "type": "slideshow",
+//       "blocks": {
+//         "template--15842706555055__6492533a-9ed1-4828-a275-e6479417dc49-16764779592660d88a-0": {
+//           "type": "slide",
+//           "settings": {
+//             "image": "shopify://shop_images/Shimpin_Web_Banner_1_jpg.jpg",
+//             "subtitle": "",
+//             "subtitle_color": "#222222",
+//             "section_subtitle_scale": 100,
+//             "title": "",
+//             "caption_size": "h1",
+//             "title_color": "#222222",
+//             "section_heading_scale": 100,
+//             "text": "",
+//             "text_color": "#222222",
+//             "section_description_scale": 129,
+//             "button_label": "",
+//             "link": "shopify://pages/banner-scroll-slider",
+//             "banner_link": false,
+//             "btn_bg_color": "#222222",
+//             "btn_border_color": "#222222",
+//             "btn_text_color": "#ffffff",
+//             "btn_bg_color_hover": "#ffffff",
+//             "btn_border_color_hover": "#222222",
+//             "btn_text_color_hover": "#222222",
+//             "zmz_btn_size": "zmz-btn-lg",
+//             "box_align": "middle-left",
+//             "show_text_box": true,
+//             "banner_box_width": 54.5,
+//             "text_box_opacity": 0,
+//             "text_alignment": "center",
+//             "image_overlay_opacity": 0,
+//             "color_scheme": "background-1",
+//             "text_alignment_mobile": "center",
+//             "margin_title": 1,
+//             "margin_subtitle": 0,
+//             "margin_text": 1,
+//             "margin_btn": 3
+//           }
+//         },
+//         "slide_innBLW": {
+//           "type": "slide",
+//           "settings": {
+//             "image": "shopify://shop_images/Shimpin_Web_Banner_2_jpg.jpg",
+//             "subtitle": "",
+//             "subtitle_color": "#222222",
+//             "section_subtitle_scale": 100,
+//             "title": "",
+//             "caption_size": "h1",
+//             "title_color": "#222222",
+//             "section_heading_scale": 100,
+//             "text": "",
+//             "text_color": "#222222",
+//             "section_description_scale": 129,
+//             "button_label": "",
+//             "link": "shopify://pages/banner-scroll-slider",
+//             "banner_link": false,
+//             "btn_bg_color": "#222222",
+//             "btn_border_color": "#222222",
+//             "btn_text_color": "#ffffff",
+//             "btn_bg_color_hover": "#ffffff",
+//             "btn_border_color_hover": "#222222",
+//             "btn_text_color_hover": "#222222",
+//             "zmz_btn_size": "zmz-btn-lg",
+//             "box_align": "middle-left",
+//             "show_text_box": true,
+//             "banner_box_width": 54.5,
+//             "text_box_opacity": 0,
+//             "text_alignment": "center",
+//             "image_overlay_opacity": 0,
+//             "color_scheme": "background-1",
+//             "text_alignment_mobile": "center",
+//             "margin_title": 1,
+//             "margin_subtitle": 0,
+//             "margin_text": 1,
+//             "margin_btn": 3
+//           }
+//         },
+//         "slide_qQQQYF": {
+//           "type": "slide",
+//           "settings": {
+//             "image": "shopify://shop_images/Shimpin_Web_Banner_3_jpg.jpg",
+//             "subtitle": "",
+//             "subtitle_color": "#222222",
+//             "section_subtitle_scale": 100,
+//             "title": "",
+//             "caption_size": "h1",
+//             "title_color": "#222222",
+//             "section_heading_scale": 100,
+//             "text": "",
+//             "text_color": "#222222",
+//             "section_description_scale": 129,
+//             "button_label": "",
+//             "link": "shopify://pages/banner-scroll-slider",
+//             "banner_link": false,
+//             "btn_bg_color": "#222222",
+//             "btn_border_color": "#222222",
+//             "btn_text_color": "#ffffff",
+//             "btn_bg_color_hover": "#ffffff",
+//             "btn_border_color_hover": "#222222",
+//             "btn_text_color_hover": "#222222",
+//             "zmz_btn_size": "zmz-btn-lg",
+//             "box_align": "middle-left",
+//             "show_text_box": true,
+//             "banner_box_width": 54.5,
+//             "text_box_opacity": 0,
+//             "text_alignment": "center",
+//             "image_overlay_opacity": 0,
+//             "color_scheme": "background-1",
+//             "text_alignment_mobile": "center",
+//             "margin_title": 1,
+//             "margin_subtitle": 0,
+//             "margin_text": 1,
+//             "margin_btn": 3
+//           }
+//         }
+//       },
+//       "block_order": [
+//         "template--15842706555055__6492533a-9ed1-4828-a275-e6479417dc49-16764779592660d88a-0",
+//         "slide_innBLW",
+//         "slide_qQQQYF"
+//       ],
+//       "settings": {
+//         "layout": "full_bleed",
+//         "slide_height": "adapt_image",
+//         "slider_visual": "dots",
+//         "auto_rotate": true,
+//         "change_slides_speed": 3,
+//         "show_text_below": false,
+//         "accessibility_info": ""
+//       },
+//       "disabled": true
+//     },
+//     "0d16ca77-c839-46d3-b918-6d6432ffa17b": {
+//       "type": "zmz-featured-collection",
+//       "blocks": {
+//         "bad4e23e-c6c2-42f6-9b0a-23f16e6e490b": {
+//           "type": "collection_tab",
+//           "settings": {
+//             "block_collection_title": "",
+//             "block_title": "",
+//             "collection": "spotlight",
+//             "card_design": "design-3",
+//             "card_text_alignment": "center",
+//             "image_ratio": "adapt",
+//             "image_padding": 0,
+//             "bg_wrap_img_color": "rgba(0,0,0,0)",
+//             "bg_border_img_color": "#ffffff",
+//             "show_secondary_image": false,
+//             "badge_card_toggle": true,
+//             "show_vendor": true,
+//             "show_rating": true,
+//             "enable_quick_add": false,
+//             "enable_quick_view": true,
+//             "show_compare": false,
+//             "show_wishlist": false,
+//             "show_color_link": false,
+//             "show_countdown": false
+//           }
+//         }
+//       },
+//       "block_order": [
+//         "bad4e23e-c6c2-42f6-9b0a-23f16e6e490b"
+//       ],
+//       "settings": {
+//         "box_type": "full_width",
+//         "section_width": 1170,
+//         "section_fluid_width": 1880,
+//         "title": "Spotlight – Designed to Command",
+//         "section_heading_scale": 100,
+//         "subtitle": "",
+//         "section_subtitle_scale": 100,
+//         "description": "Designed to command attention — before you speak.",
+//         "customInfo": "",
+//         "section_description_scale": 100,
+//         "description_style": "body",
+//         "heading_alignment": "center",
+//         "inverted": false,
+//         "products_to_show": 4,
+//         "columns_desktop": 4,
+//         "spacing_grid_horizontal": 15,
+//         "full_width": true,
+//         "show_view_all": true,
+//         "view_all_btn_text": "View all",
+//         "view_all_style": "solid",
+//         "use_tabs": false,
+//         "enable_desktop_slider": true,
+//         "carousel_control_type": "navigation",
+//         "design_type": "type_1",
+//         "color_scheme": "background-1",
+//         "customColor": false,
+//         "bg_color": "rgba(0,0,0,0)",
+//         "container_color_scheme": "background-1",
+//         "section_custom_color": false,
+//         "bg_section_color": "rgba(0,0,0,0)",
+//         "bg_color_opacity": 0.1,
+//         "columns_mobile": "2",
+//         "swipe_on_mobile": false,
+//         "desktop_section_padding": "3rem 3rem 3rem 3rem",
+//         "desktopContainerPadding": "3rem 3rem 1rem 3rem",
+//         "mobile_section_padding": "1rem 1rem 1rem 1rem",
+//         "mobileContainerPadding": "1rem 1rem 1rem 1rem"
+//       }
+//     },
+//     "zmz_featured_collection_GTPt4B": {
+//       "type": "zmz-featured-collection",
+//       "blocks": {
+//         "collection_tab_N3eDfj": {
+//           "type": "collection_tab",
+//           "settings": {
+//             "block_collection_title": "",
+//             "block_title": "",
+//             "collection": "trousers",
+//             "card_design": "design-3",
+//             "card_text_alignment": "center",
+//             "image_ratio": "adapt",
+//             "image_padding": 0,
+//             "bg_wrap_img_color": "rgba(0,0,0,0)",
+//             "bg_border_img_color": "#ffffff",
+//             "show_secondary_image": false,
+//             "badge_card_toggle": true,
+//             "show_vendor": true,
+//             "show_rating": true,
+//             "enable_quick_add": false,
+//             "enable_quick_view": true,
+//             "show_compare": false,
+//             "show_wishlist": false,
+//             "show_color_link": false,
+//             "show_countdown": false
+//           }
+//         }
+//       },
+//       "block_order": [
+//         "collection_tab_N3eDfj"
+//       ],
+//       "settings": {
+//         "box_type": "full_width",
+//         "section_width": 1170,
+//         "section_fluid_width": 1880,
+//         "title": "Premium Trousers Collection",
+//         "section_heading_scale": 100,
+//         "subtitle": "",
+//         "section_subtitle_scale": 100,
+//         "description": "Smart fits. Sharp looks.",
+//         "customInfo": "",
+//         "section_description_scale": 100,
+//         "description_style": "body",
+//         "heading_alignment": "center",
+//         "inverted": false,
+//         "products_to_show": 8,
+//         "columns_desktop": 4,
+//         "spacing_grid_horizontal": 15,
+//         "full_width": true,
+//         "show_view_all": true,
+//         "view_all_btn_text": "View all",
+//         "view_all_style": "solid",
+//         "use_tabs": false,
+//         "enable_desktop_slider": true,
+//         "carousel_control_type": "navigation",
+//         "design_type": "type_1",
+//         "color_scheme": "background-1",
+//         "customColor": false,
+//         "bg_color": "rgba(0,0,0,0)",
+//         "container_color_scheme": "background-1",
+//         "section_custom_color": false,
+//         "bg_section_color": "rgba(0,0,0,0)",
+//         "bg_color_opacity": 0.1,
+//         "columns_mobile": "2",
+//         "swipe_on_mobile": false,
+//         "desktop_section_padding": "3rem 3rem 3rem 3rem",
+//         "desktopContainerPadding": "3rem 3rem 1rem 3rem",
+//         "mobile_section_padding": "1rem 1rem 1rem 1rem",
+//         "mobileContainerPadding": "1rem 1rem 1rem 1rem"
+//       }
+//     },
+//     "1771348970219ad1b5": {
+//       "type": "apps",
+//       "blocks": {
+//         "judge_me_reviews_testimonials_carousel_fKttwy": {
+//           "type": "shopify://apps/judge-me-reviews/blocks/testimonials_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+//           "settings": {
+//             "show_sample_reviews": true,
+//             "reviews_selection": "all",
+//             "products": [],
+//             "star_rating": "all",
+//             "max_reviews": 20,
+//             "quote_marks_size": "small",
+//             "product_name_text_size": "small",
+//             "verified_badge_style": "icon",
+//             "card_height": "medium",
+//             "text_size": "small",
+//             "stars_size": "medium",
+//             "arrows_position": "bottom",
+//             "max_width": 1100,
+//             "corner_styling": "soft",
+//             "quote_marks_style": "serif",
+//             "card_color": "#f9f9f9",
+//             "stars_and_quote_marks_color": "#108474",
+//             "text_color": "#000000",
+//             "arrows_color": "#000000",
+//             "show_border": false,
+//             "border_color": "#108474",
+//             "show_drop_shadow": false,
+//             "transition_speed": 5,
+//             "header_text": "Customers are saying",
+//             "show_average_rating": true
+//           }
+//         }
+//       },
+//       "block_order": [
+//         "judge_me_reviews_testimonials_carousel_fKttwy"
+//       ],
+//       "settings": {
+//         "include_margins": true
+//       },
+//       "disabled": true
+//     },
+//     "e25cfafd-d27a-465b-a830-cc36da8a2e15": {
+//       "type": "zmz-icon-text",
+//       "blocks": {
+//         "template--14900282556458__e25cfafd-d27a-465b-a830-cc36da8a2e15-1678788489ff19caae-0": {
+//           "type": "column",
+//           "settings": {
+//             "image_ratio": "adapt",
+//             "image_width": 4,
+//             "icon-layout": "vertical",
+//             "icon_1": "truck",
+//             "svgColor": "#222222",
+//             "customHtml": "",
+//             "title": "Free delivery",
+//             "title_color": "#222222",
+//             "section_heading_scale": 67,
+//             "text": "<p>Free shipping across India</p>",
+//             "text_color": "#7b7b7b",
+//             "section_description_scale": 120,
+//             "bg_border_img_color": "rgba(0,0,0,0)",
+//             "image_padding": 0,
+//             "info_padding": "1rem 1rem 1rem 0rem",
+//             "link_label": "",
+//             "link": "",
+//             "info_padding_mob": "1rem 1rem 1rem 0rem"
+//           }
+//         },
+//         "template--14900282556458__e25cfafd-d27a-465b-a830-cc36da8a2e15-1678788489ff19caae-1": {
+//           "type": "column",
+//           "settings": {
+//             "image_ratio": "adapt",
+//             "image_width": 4,
+//             "icon-layout": "vertical",
+//             "icon_1": "wallet",
+//             "svgColor": "#121212",
+//             "customHtml": "",
+//             "title": "100% Payment Secure",
+//             "title_color": "#222222",
+//             "section_heading_scale": 67,
+//             "text": "<p>COD & prepaid payments </p>",
+//             "text_color": "#7b7b7b",
+//             "section_description_scale": 119,
+//             "bg_border_img_color": "rgba(0,0,0,0)",
+//             "image_padding": 0,
+//             "info_padding": "1rem 1rem 1rem 0rem",
+//             "link_label": "",
+//             "link": "",
+//             "info_padding_mob": "1rem 1rem 1rem 0rem"
+//           }
+//         },
+//         "template--14900282556458__e25cfafd-d27a-465b-a830-cc36da8a2e15-1678788489ff19caae-2": {
+//           "type": "column",
+//           "settings": {
+//             "image_ratio": "adapt",
+//             "image_width": 4,
+//             "icon-layout": "vertical",
+//             "icon_1": "rotate_left",
+//             "svgColor": "#121212",
+//             "customHtml": "",
+//             "title": "7 Days Easy Return",
+//             "title_color": "#222222",
+//             "section_heading_scale": 67,
+//             "text": "<p>Hassle-free return policy</p>",
+//             "text_color": "#7b7b7b",
+//             "section_description_scale": 119,
+//             "bg_border_img_color": "rgba(0,0,0,0)",
+//             "image_padding": 0,
+//             "info_padding": "1rem 1rem 1rem 0rem",
+//             "link_label": "",
+//             "link": "",
+//             "info_padding_mob": "1rem 1rem 1rem 0rem"
+//           }
+//         },
+//         "e3f1d2b5-33e6-49b0-8a08-04471da28e07": {
+//           "type": "column",
+//           "settings": {
+//             "image_ratio": "adapt",
+//             "image_width": 4,
+//             "icon-layout": "vertical",
+//             "icon_1": "support",
+//             "svgColor": "#121212",
+//             "customHtml": "",
+//             "title": "Customer Support 24/7",
+//             "title_color": "#222222",
+//             "section_heading_scale": 67,
+//             "text": "<p>We’re here to help anytime<br/></p>",
+//             "text_color": "#7b7b7b",
+//             "section_description_scale": 119,
+//             "bg_border_img_color": "rgba(0,0,0,0)",
+//             "image_padding": 0,
+//             "info_padding": "1rem 1rem 1rem 0rem",
+//             "link_label": "",
+//             "link": "",
+//             "info_padding_mob": "1rem 1rem 1rem 0rem"
+//           }
+//         }
+//       },
+//       "block_order": [
+//         "template--14900282556458__e25cfafd-d27a-465b-a830-cc36da8a2e15-1678788489ff19caae-0",
+//         "template--14900282556458__e25cfafd-d27a-465b-a830-cc36da8a2e15-1678788489ff19caae-1",
+//         "template--14900282556458__e25cfafd-d27a-465b-a830-cc36da8a2e15-1678788489ff19caae-2",
+//         "e3f1d2b5-33e6-49b0-8a08-04471da28e07"
+//       ],
+//       "settings": {
+//         "box_type": "box",
+//         "section_width": 1200,
+//         "section_fluid_width": 1880,
+//         "title": "",
+//         "section_heading_scale": 100,
+//         "subtitle": "",
+//         "section_subtitle_scale": 100,
+//         "description": "",
+//         "section_description_scale": 100,
+//         "heading_alignment": "center",
+//         "inverted": false,
+//         "columns_desktop": 4,
+//         "spacing_grid_horizontal": 30,
+//         "column_alignment": "center",
+//         "image_vertical_alignment": "middle",
+//         "off_carousel_counter": false,
+//         "nav_style_type": "type_2",
+//         "enable_desktop_slider": true,
+//         "caption_full_width": false,
+//         "background_style": "primary",
+//         "button_label": "",
+//         "button_link": "",
+//         "color_scheme": "background-1",
+//         "customColor": false,
+//         "bg_color": "",
+//         "container_color_scheme": "background-1",
+//         "section_custom_color": false,
+//         "bg_section_color": "",
+//         "bg_color_opacity": 0.1,
+//         "columns_mobile": "2",
+//         "swipe_on_mobile": false,
+//         "desktop_section_padding": "2rem 2rem 2rem 2rem",
+//         "desktopContainerPadding": "0rem 1.5rem 3rem 1.5rem",
+//         "mobile_section_padding": "0rem 1.5rem 0rem 1.5rem",
+//         "mobileContainerPadding": "0rem 1rem 0rem 1rem"
+//       },
+//       "disabled": true
+//     },
+//     "shimpin_hero": {
+//       "type": "shimpin-hero",
+//       "blocks": {
+//         "slide_1": {
+//           "type": "slide",
+//           "settings": {
+//             "image": "shopify://shop_images/Shimpin_Web_Banner_1_jpg.jpg",
+//             "link": "shopify://pages/banner-scroll-slider",
+//             "overlay_opacity": 0,
+//             "eyebrow": "",
+//             "heading": "",
+//             "text": "",
+//             "button_label": ""
+//           }
+//         },
+//         "slide_2": {
+//           "type": "slide",
+//           "settings": {
+//             "image": "shopify://shop_images/Shimpin_Web_Banner_2_jpg.jpg",
+//             "link": "shopify://pages/banner-scroll-slider",
+//             "overlay_opacity": 0,
+//             "eyebrow": "",
+//             "heading": "",
+//             "text": "",
+//             "button_label": ""
+//           }
+//         },
+//         "slide_3": {
+//           "type": "slide",
+//           "settings": {
+//             "image": "shopify://shop_images/Shimpin_Web_Banner_3_jpg.jpg",
+//             "link": "shopify://pages/banner-scroll-slider",
+//             "overlay_opacity": 0,
+//             "eyebrow": "",
+//             "heading": "",
+//             "text": "",
+//             "button_label": ""
+//           }
+//         }
+//       },
+//       "block_order": [
+//         "slide_1",
+//         "slide_2",
+//         "slide_3"
+//       ],
+//       "settings": {
+//         "autoplay": true,
+//         "speed": 5,
+//         "show_arrows": true,
+//         "show_dots": true,
+//         "accent_color": "#E6007E",
+//         "accessibility_label": "Shimpin featured collections"
+//       }
+//     },
+//     "shimpin_browse_all": {
+//       "type": "shimpin-browse-all",
+//       "blocks": {
+//         "tile_shirts": {
+//           "type": "tile",
+//           "settings": {
+//             "label": "Shirts",
+//             "link": "/collections/shirts",
+//             "width": "third",
+//             "center_on_row": false,
+//             "image_mode": "above",
+//             "image_side": "right",
+//             "image_height": 150,
+//             "image_edge_gap": 8
+//           }
+//         },
+//         "tile_trousers": {
+//           "type": "tile",
+//           "settings": {
+//             "label": "Trousers",
+//             "link": "/collections/trousers",
+//             "width": "two_thirds",
+//             "center_on_row": false,
+//             "image_mode": "below",
+//             "image_side": "right",
+//             "image_height": 160,
+//             "image_edge_gap": 4
+//           }
+//         },
+//         "tile_skirts": {
+//           "type": "tile",
+//           "settings": {
+//             "label": "Skirts",
+//             "link": "/collections/skirts",
+//             "width": "two_thirds",
+//             "center_on_row": true,
+//             "image_mode": "inside",
+//             "image_side": "center",
+//             "image_height": 140,
+//             "image_edge_gap": 8
+//           }
+//         }
+//       },
+//       "block_order": [
+//         "tile_shirts",
+//         "tile_trousers",
+//         "tile_skirts"
+//       ],
+//       "settings": {
+//         "heading": "Browse all products",
+//         "heading_color": "#0E3051",
+//         "panel_color": "#EEEEEE",
+//         "tile_color": "#BFC6D0",
+//         "padding_desktop": 48,
+//         "padding_mobile": 24
+//       }
+//     },
+//     "shimpin_story": {
+//       "type": "shimpin-story",
+//       "settings": {
+//         "title": "The Shimpin Story",
+//         "subheading": "Made for Women Who Lead.",
+//         "text": "<p>Shimpin is a contemporary Indian women's formalwear brand created for bold, self-driven women who lead with confidence, purpose and individuality.</p><p>We believe formalwear is more than looking professional. It's about feeling empowered, capable and confident in every space you step into.</p>",
+//         "button_label": "",
+//         "button_link": "",
+//         "bg_color": "#FFF1F8",
+//         "title_color": "#0E3051",
+//         "text_color": "#5F6F87",
+//         "padding_desktop": 56,
+//         "padding_mobile": 32
+//       }
+//     },
+//     "shimpin_reviews": {
+//       "type": "shimpin-reviews",
+//       "blocks": {
+//         "review_1": {
+//           "type": "review",
+//           "settings": {
+//             "product_name": "Essence Long Denim",
+//             "rating": 5,
+//             "reviewer": "Lisa",
+//             "quote": "I like this pants. Its fit and perfect for me. The material is so comfortable that it can be used anywhere. It is also suitable to be combined with all types of my clothes."
+//           }
+//         },
+//         "review_2": {
+//           "type": "review",
+//           "settings": {
+//             "product_name": "Essence Long Denim",
+//             "rating": 5,
+//             "reviewer": "Lisa",
+//             "quote": "I like this pants. Its fit and perfect for me. The material is so comfortable that it can be used anywhere. It is also suitable to be combined with all types of my clothes."
+//           }
+//         },
+//         "review_3": {
+//           "type": "review",
+//           "settings": {
+//             "product_name": "Essence Long Denim",
+//             "rating": 5,
+//             "reviewer": "Lisa",
+//             "quote": "I like this pants. Its fit and perfect for me. The material is so comfortable that it can be used anywhere. It is also suitable to be combined with all types of my clothes."
+//           }
+//         }
+//       },
+//       "block_order": [
+//         "review_1",
+//         "review_2",
+//         "review_3"
+//       ],
+//       "settings": {
+//         "heading": "What they say",
+//         "text_color": "#0E3051",
+//         "star_color": "#F5B800",
+//         "bg_color": "#FFFFFF",
+//         "padding_desktop": 56,
+//         "padding_mobile": 32
+//       }
+//     },
+//     "shimpin_trust": {
+//       "type": "shimpin-trust-strip",
+//       "blocks": {
+//         "item_0": {
+//           "type": "item",
+//           "settings": {
+//             "icon": "alteration",
+//             "label": "Free Alteration"
+//           }
+//         },
+//         "item_1": {
+//           "type": "item",
+//           "settings": {
+//             "icon": "delivery",
+//             "label": "4 hrs Delivery*"
+//           }
+//         },
+//         "item_2": {
+//           "type": "item",
+//           "settings": {
+//             "icon": "returns",
+//             "label": "Hassle-free Returns"
+//           }
+//         },
+//         "item_3": {
+//           "type": "item",
+//           "settings": {
+//             "icon": "options",
+//             "label": "Endless Options"
+//           }
+//         }
+//       },
+//       "block_order": [
+//         "item_0",
+//         "item_1",
+//         "item_2",
+//         "item_3"
+//       ],
+//       "settings": {
+//         "bg_color": "#0E3051",
+//         "text_color": "#FFFFFF",
+//         "padding_desktop": 56,
+//         "padding_mobile": 32
+//       }
+//     }
+//   },
+//   "order": [
+//     "shimpin_hero",
+//     "0d16ca77-c839-46d3-b918-6d6432ffa17b",
+//     "shimpin_browse_all",
+//     "zmz_featured_collection_GTPt4B",
+//     "shimpin_story",
+//     "shimpin_reviews",
+//     "shimpin_trust",
+//     "6492533a-9ed1-4828-a275-e6479417dc49",
+//     "1771348970219ad1b5",
+//     "e25cfafd-d27a-465b-a830-cc36da8a2e15"
+//   ]
+// }
+
+
+
+
 /*
  * ------------------------------------------------------------
  * IMPORTANT: The contents of this file are auto-generated.
@@ -140,7 +1343,8 @@
         "change_slides_speed": 3,
         "show_text_below": false,
         "accessibility_info": ""
-      }
+      },
+      "disabled": true
     },
     "0d16ca77-c839-46d3-b918-6d6432ffa17b": {
       "type": "zmz-featured-collection",
@@ -323,7 +1527,8 @@
       ],
       "settings": {
         "include_margins": true
-      }
+      },
+      "disabled": true
     },
     "e25cfafd-d27a-465b-a830-cc36da8a2e15": {
       "type": "zmz-icon-text",
@@ -463,13 +1668,241 @@
         "desktopContainerPadding": "0rem 1.5rem 3rem 1.5rem",
         "mobile_section_padding": "0rem 1.5rem 0rem 1.5rem",
         "mobileContainerPadding": "0rem 1rem 0rem 1rem"
+      },
+      "disabled": true
+    },
+    "shimpin_hero": {
+      "type": "shimpin-hero",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Shimpin_Web_Banner_1_jpg.jpg",
+            "link": "",
+            "overlay_opacity": 0,
+            "eyebrow": "",
+            "heading": "",
+            "text": "",
+            "button_label": ""
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Shimpin_Web_Banner_2_jpg.jpg",
+            "link": "",
+            "overlay_opacity": 0,
+            "eyebrow": "",
+            "heading": "",
+            "text": "",
+            "button_label": ""
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Shimpin_Web_Banner_3_jpg.jpg",
+            "link": "",
+            "overlay_opacity": 0,
+            "eyebrow": "",
+            "heading": "",
+            "text": "",
+            "button_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ],
+      "settings": {
+        "autoplay": true,
+        "speed": 5,
+        "show_arrows": true,
+        "show_dots": true,
+        "accent_color": "#E6007E",
+        "accessibility_label": "Shimpin featured collections",
+        "ratio_desktop": "21 / 8",
+        "max_height_desktop": 560,
+        "ratio_mobile": "5 / 4",
+        "max_height_mobile": 440
+      }
+    },
+    "shimpin_browse_all": {
+      "type": "shimpin-browse-all",
+      "blocks": {
+        "tile_shirts": {
+          "type": "tile",
+          "settings": {
+            "label": "Shirts",
+            "link": "/collections/shirts",
+            "width": "third",
+            "center_on_row": false,
+            "image_mode": "above",
+            "image_side": "right",
+            "image_height": 150,
+            "image_edge_gap": 8
+          }
+        },
+        "tile_trousers": {
+          "type": "tile",
+          "settings": {
+            "label": "Trousers",
+            "link": "/collections/trousers",
+            "width": "two_thirds",
+            "center_on_row": false,
+            "image_mode": "below",
+            "image_side": "right",
+            "image_height": 160,
+            "image_edge_gap": 4
+          }
+        },
+        "tile_skirts": {
+          "type": "tile",
+          "settings": {
+            "label": "Skirts",
+            "link": "/collections/skirts",
+            "width": "two_thirds",
+            "center_on_row": true,
+            "image_mode": "inside",
+            "image_side": "center",
+            "image_height": 140,
+            "image_edge_gap": 8
+          }
+        }
+      },
+      "block_order": [
+        "tile_shirts",
+        "tile_trousers",
+        "tile_skirts"
+      ],
+      "settings": {
+        "heading": "Browse all products",
+        "heading_color": "#0E3051",
+        "panel_color": "#EEEEEE",
+        "tile_color": "#BFC6D0",
+        "padding_desktop": 32,
+        "padding_mobile": 24,
+        "tile_height": 220,
+        "row_gap": 28
+      }
+    },
+    "shimpin_story": {
+      "type": "shimpin-story",
+      "settings": {
+        "title": "The Shimpin Story",
+        "subheading": "Made for Women Who Lead.",
+        "text": "<p>Shimpin is a contemporary Indian women's formalwear brand created for bold, self-driven women who lead with confidence, purpose and individuality.</p><p>We believe formalwear is more than looking professional. It's about feeling empowered, capable and confident in every space you step into.</p>",
+        "button_label": "",
+        "button_link": "",
+        "bg_color": "#FFF1F8",
+        "title_color": "#0E3051",
+        "text_color": "#5F6F87",
+        "padding_desktop": 56,
+        "padding_mobile": 32
+      }
+    },
+    "shimpin_reviews": {
+      "type": "shimpin-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "product_name": "Essence Long Denim",
+            "rating": 5,
+            "reviewer": "Lisa",
+            "quote": "I like this pants. Its fit and perfect for me. The material is so comfortable that it can be used anywhere. It is also suitable to be combined with all types of my clothes."
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "product_name": "Essence Long Denim",
+            "rating": 5,
+            "reviewer": "Lisa",
+            "quote": "I like this pants. Its fit and perfect for me. The material is so comfortable that it can be used anywhere. It is also suitable to be combined with all types of my clothes."
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "product_name": "Essence Long Denim",
+            "rating": 5,
+            "reviewer": "Lisa",
+            "quote": "I like this pants. Its fit and perfect for me. The material is so comfortable that it can be used anywhere. It is also suitable to be combined with all types of my clothes."
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3"
+      ],
+      "settings": {
+        "heading": "What they say",
+        "text_color": "#0E3051",
+        "star_color": "#F5B800",
+        "bg_color": "#FFFFFF",
+        "padding_desktop": 56,
+        "padding_mobile": 32
+      }
+    },
+    "shimpin_trust": {
+      "type": "shimpin-trust-strip",
+      "blocks": {
+        "item_0": {
+          "type": "item",
+          "settings": {
+            "icon": "alteration",
+            "label": "Free Alteration"
+          }
+        },
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "icon": "delivery",
+            "label": "4 hrs Delivery*"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "icon": "returns",
+            "label": "Hassle-free Returns"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "icon": "options",
+            "label": "Endless Options"
+          }
+        }
+      },
+      "block_order": [
+        "item_0",
+        "item_1",
+        "item_2",
+        "item_3"
+      ],
+      "settings": {
+        "bg_color": "#0E3051",
+        "text_color": "#FFFFFF",
+        "padding_desktop": 56,
+        "padding_mobile": 32
       }
     }
   },
   "order": [
-    "6492533a-9ed1-4828-a275-e6479417dc49",
+    "shimpin_hero",
     "0d16ca77-c839-46d3-b918-6d6432ffa17b",
+    "shimpin_browse_all",
     "zmz_featured_collection_GTPt4B",
+    "shimpin_story",
+    "shimpin_reviews",
+    "shimpin_trust",
+    "6492533a-9ed1-4828-a275-e6479417dc49",
     "1771348970219ad1b5",
     "e25cfafd-d27a-465b-a830-cc36da8a2e15"
   ]
