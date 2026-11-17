@@ -41,7 +41,7 @@
             "variant_pills_border_thickness": 2,
             "variant_pills_border_opacity": 50,
             "variant_pills_radius": 4,
-            "picker_type": "image-button",
+            "picker_type": "image_button",
             "image_button_ratio": "portrait",
             "color_picker_type": "color_label",
             "inventory_threshold": 5,
@@ -128,60 +128,30 @@
             "enable_quick_add": false
           }
         },
-        "share": {
+               "share": {
           "type": "share",
           "settings": {
             "share_label": "Share"
           }
-        },
-        "judge_me_reviews_review_widget_AzLtK8": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1200,
-            "show_shop_reviews": true,
-            "empty_state": "empty_widget"
-          }
         }
       },
-      // "block_order": [
-      //   "judge_me_reviews_preview_badge_QXXj97",
-      //   "title",
-      //   "price",
-      //   "5581422c-cd42-4bd2-b1ee-4ebe51b0cb41",
-      //   "variant_picker",
-      //   "35cc6300-f8f4-4fc8-933d-0dcb0a0d21bd",
-      //   "quantity_selector",
-      //   "snap_coupon_coupon_block_L6GqJM",
-      //   "buy_buttons",
-      //   "custom_liquid_KTbBMj",
-      //   "21395e72-380e-479f-a696-b99e3de1dcf6",
-      //   "collapsible_tab_GBUKfp",
-      //   "collapsible_tab_pNBjgc",
-      //   "b7a5d6ff-5409-45b1-bd19-92b967b322d6",
-      //   "share",
-      //   "judge_me_reviews_review_widget_AzLtK8"
-      // ],
-
-
       "block_order": [
-  "title",
-  "judge_me_reviews_preview_badge_QXXj97",
-  "price",
-  "5581422c-cd42-4bd2-b1ee-4ebe51b0cb41",
-  "variant_picker",
-  "35cc6300-f8f4-4fc8-933d-0dcb0a0d21bd",
-  "quantity_selector",
-  "snap_coupon_coupon_block_L6GqJM",
-  "buy_buttons",
-  "custom_liquid_KTbBMj",
-  "21395e72-380e-479f-a696-b99e3de1dcf6",
-  "collapsible_tab_GBUKfp",
-  "collapsible_tab_pNBjgc",
-  "b7a5d6ff-5409-45b1-bd19-92b967b322d6",
-  "share"
-],
-
+        "title",
+        "judge_me_reviews_preview_badge_QXXj97",
+        "price",
+        "5581422c-cd42-4bd2-b1ee-4ebe51b0cb41",
+        "variant_picker",
+        "35cc6300-f8f4-4fc8-933d-0dcb0a0d21bd",
+        "quantity_selector",
+        "snap_coupon_coupon_block_L6GqJM",
+        "buy_buttons",
+        "custom_liquid_KTbBMj",
+        "21395e72-380e-479f-a696-b99e3de1dcf6",
+        "collapsible_tab_GBUKfp",
+        "collapsible_tab_pNBjgc",
+        "b7a5d6ff-5409-45b1-bd19-92b967b322d6",
+        "share"
+      ],
 
       "settings": {
         "page_width": 1500,
@@ -308,21 +278,21 @@
       }
     },
     "reviews": {
-  "type": "shimpin-reviews",
-  "blocks": {
-    "judge_me_reviews_review_widget_AzLtK8": {
-      "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-      "settings": {
-        "review_data": "real_data",
-        "max_width": 1200,
-        "show_shop_reviews": true,
-        "empty_state": "empty_widget"
-      }
+      "type": "shimpin-reviews-2",
+      "blocks": {
+        "judge_me_reviews_review_widget_AzLtK8": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": ["judge_me_reviews_review_widget_AzLtK8"],
+      "settings": { "heading": "Customer reviews", "collapsed_height": 500 }
     }
-  },
-  "block_order": ["judge_me_reviews_review_widget_AzLtK8"],
-  "settings": { "heading": "Customer reviews", "collapsed_height": 500 }
-}
   },
   "order": [
     "main",

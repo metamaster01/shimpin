@@ -1,0 +1,354 @@
+{%- comment -%}
+  Shimpin "Our Products": tabbed product grid (All / Shirts / Trousers / Skirts ...)
+  - Each tab is a block with a collection. "All" mixes products from every tab (round-robin).
+  - Every product is rendered once; tabs only show/hide cards, so switching is instant.
+  - Uses the theme's own `card-product` snippet with a fixed image shape, so all cards match.
+  Does NOT touch zmz-featured-collection (Spotlight keeps working as before).
+{%- endcomment -%}
+
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{%- if section.settings.enable_quick_view -%}
+  <link rel="stylesheet" href="{{ 'quick-add.css' | asset_url }}" media="print" onload="this.media='all'">
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- liquid
+  assign per_tab = section.settings.products_per_tab
+  assign last_index = per_tab | minus: 1
+  assign seen = ''
+  assign has_tabs = false
+  for tb in section.blocks
+    if tb.settings.collection != blank
+      assign has_tabs = true
+    endif
+  endfor
+  assign first_selected_all = section.settings.show_all_tab
+-%}
+
+<section
+  id="ShimpinProducts-{{ section.id }}"
+  class="shp-products"
+  style="
+    --shp-prod-accent: {{ section.settings.accent_color }};
+    --shp-prod-max: {{ section.settings.max_width }}px;
+    --shp-cols: {{ section.settings.columns_desktop }};
+    --shp-pad-d: {{ section.settings.padding_desktop }}px;
+    --shp-pad-m: {{ section.settings.padding_mobile }}px;
+    --shp-prod-bg: {{ section.settings.bg_color }};
+    --product-card-text-alignment: left;
+  "
+>
+  <div class="shp-products__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="shp-products__title">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="shp-products__sub">{{ section.settings.subheading | escape }}</p>
+    {%- endif -%}
+
+    {%- if has_tabs -%}
+      <shimpin-products
+        data-limit="{{ per_tab }}"
+        data-all-url="{{ section.settings.all_link | default: routes.all_products_collection_url }}"
+      >
+        <div class="shp-products__tabs" role="tablist" aria-label="{{ section.settings.heading | escape }}">
+          {%- if section.settings.show_all_tab -%}
+            <button type="button" class="shp-products__tab is-active" role="tab" id="ShpTab-{{ section.id }}-all"
+              data-tab="all" data-url="{{ section.settings.all_link | default: routes.all_products_collection_url }}"
+              aria-selected="true" aria-controls="ShpPanel-{{ section.id }}">
+              {{- section.settings.all_label | default: 'All' | escape -}}
+            </button>
+          {%- endif -%}
+          {%- for block in section.blocks -%}
+            {%- assign col = block.settings.collection -%}
+            {%- if col != blank -%}
+              {%- assign is_first = false -%}
+              {%- if section.settings.show_all_tab == false and forloop.first -%}{%- assign is_first = true -%}{%- endif -%}
+              <button type="button" class="shp-products__tab{% if is_first %} is-active{% endif %}" role="tab"
+                id="ShpTab-{{ section.id }}-{{ forloop.index }}"
+                data-tab="t{{ forloop.index }}" data-url="{{ col.url }}"
+                aria-selected="{{ is_first }}" aria-controls="ShpPanel-{{ section.id }}"
+                {{ block.shopify_attributes }}>
+                {{- block.settings.label | default: col.title | escape -}}
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        <ul class="shp-products__grid" id="ShpPanel-{{ section.id }}" role="tabpanel" data-grid>
+          {%- for i in (0..last_index) -%}
+            {%- for tb in section.blocks -%}
+              {%- assign product = tb.settings.collection.products[i] -%}
+              {%- if product != blank -%}
+                {%- assign seen_key = '|' | append: product.handle | append: '|' -%}
+                {%- unless seen contains seen_key -%}
+                  {%- assign seen = seen | append: seen_key -%}
+                  {%- assign p_handles = product.collections | map: 'handle' -%}
+                  {%- assign groups = '' -%}
+                  {%- for tb2 in section.blocks -%}
+                    {%- if tb2.settings.collection != blank and p_handles contains tb2.settings.collection.handle -%}
+                      {%- assign groups = groups | append: ' t' | append: forloop.index -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  <li class="shp-products__item" data-card data-groups="{{ groups | strip }}">
+                    {% render 'card-product',
+                      card_product: product,
+                      card_design: 'design-3',
+                      media_aspect_ratio: section.settings.image_ratio,
+                      show_secondary_image: false,
+                      show_vendor: section.settings.show_vendor,
+                      badge_card_toggle: section.settings.show_badge,
+                      show_rating: section.settings.show_rating,
+                      show_quick_add: false,
+                      show_quick_view: section.settings.enable_quick_view,
+                      show_color_link: false,
+                      show_compare: false,
+                      show_wishlist: false,
+                      show_countdown: false,
+                      variants_type_url: settings.variants_type_url,
+                      product_card_variants_limit: settings.product_card_variants_limit,
+                      section_id: section.id
+                    %}
+                  </li>
+                {%- endunless -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endfor -%}
+        </ul>
+
+        <p class="shp-products__empty" data-empty hidden>{{ section.settings.empty_text | escape }}</p>
+
+        {%- if section.settings.show_view_all -%}
+          <div class="shp-products__more">
+            <a class="shp-products__btn" data-view-all href="{{ section.settings.all_link | default: routes.all_products_collection_url }}">
+              {{- section.settings.view_all_label | default: 'View all' | escape -}}
+            </a>
+          </div>
+        {%- endif -%}
+      </shimpin-products>
+    {%- else -%}
+      <p class="shp-products__empty">Add at least one tab and choose its collection.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .shp-products { background: var(--shp-prod-bg, transparent); padding: var(--shp-pad-m) 1.5rem; }
+  @media screen and (min-width: 750px) { .shp-products { padding: var(--shp-pad-d) 3rem; } }
+  .shp-products__inner { max-width: var(--shp-prod-max, 1170px); margin: 0 auto; }
+
+  .shp-products__title {
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-family: var(--font-body-family, inherit);
+    font-weight: 500;
+    font-size: clamp(2.4rem, 3.4vw, 4.2rem);
+    line-height: 1.1;
+    color: #0e3051;
+  }
+  .shp-products__sub {
+    margin: 0.8rem auto 0;
+    max-width: 56rem;
+    text-align: center;
+    font-size: clamp(1.3rem, 1.2vw, 1.5rem);
+    color: rgba(14, 48, 81, 0.7);
+  }
+
+  /* ---- tabs ---- */
+  .shp-products__tabs {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 0.4rem clamp(1.8rem, 3vw, 3.4rem);
+    margin: 1.4rem 0 clamp(2.2rem, 3vw, 3.4rem);
+  }
+  .shp-products__tab {
+    position: relative; padding: 1rem 0.2rem; border: 0; background: none; cursor: pointer;
+    font: inherit; font-size: 1.4rem; font-weight: 500; letter-spacing: 0.02em;
+    color: rgba(14, 48, 81, 0.62);
+    transition: color 0.2s ease;
+  }
+  .shp-products__tab::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0.2rem; height: 2px;
+    background: var(--shp-prod-accent, #e6007e);
+    transform: scaleX(0); transform-origin: center; transition: transform 0.25s ease;
+  }
+  .shp-products__tab:hover { color: #0e3051; }
+  .shp-products__tab.is-active { color: #0e3051; }
+  .shp-products__tab.is-active::after { transform: scaleX(1); }
+  .shp-products__tab:focus-visible { outline: 2px solid #0e3051; outline-offset: 2px; border-radius: 4px; }
+
+  /* ---- grid: 2 cols phone, 3 cols tablet+, optional 4 on wide screens ---- */
+  .shp-products__grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.4rem 1.2rem;
+  }
+  @media screen and (min-width: 750px) {
+    .shp-products__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3.2rem 2rem; }
+  }
+  @media screen and (min-width: 990px) {
+    .shp-products__grid { grid-template-columns: repeat(var(--shp-cols, 3), minmax(0, 1fr)); gap: 3.6rem 2.4rem; }
+  }
+  .shp-products__item { min-width: 0; margin: 0; padding: 0; }
+  .shp-products__item[hidden] { display: none; }
+  .shp-products__grid.is-in .shp-products__item { animation: shpFadeUp 0.4s ease both; }
+  @keyframes shpFadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  /* ---- card polish: same look on every card ---- */
+  .shp-products .card-wrapper,
+  .shp-products .card { height: 100%; }
+  .shp-products .card__content,
+  .shp-products .card__information,
+  .shp-products .card-information { text-align: left; align-items: flex-start; justify-content: flex-start; }
+  .shp-products .card__heading {
+    font-family: var(--font-body-family, inherit);
+    font-size: clamp(1.3rem, 1.2vw, 1.5rem);
+    min-height: 2.7em;                     /* two lines, so prices line up across cards */
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .shp-products .card-information .price { margin-top: 0.2rem; }
+  .shp-products .card-information .rating-text { margin: 0; }
+
+  .shp-products__empty { text-align: center; padding: 3rem 0; color: rgba(14, 48, 81, 0.7); }
+  .shp-products__empty[hidden] { display: none; }
+
+  .shp-products__more { display: flex; justify-content: center; margin-top: clamp(2.6rem, 3.4vw, 4rem); }
+  .shp-products__btn {
+    display: inline-block; padding: 1.2rem 3.2rem; border-radius: 999px;
+    border: 1px solid #0e3051; color: #0e3051; background: transparent;
+    font-size: 1.4rem; font-weight: 500; text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .shp-products__btn:hover { background: #0e3051; color: #fff; }
+  .shp-products__btn:focus-visible { outline: 2px solid #0e3051; outline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shp-products__tab, .shp-products__tab::after, .shp-products__btn { transition: none; }
+    .shp-products__grid.is-in .shp-products__item { animation: none; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('shimpin-products')) {
+    customElements.define('shimpin-products', class ShimpinProducts extends HTMLElement {
+      connectedCallback() {
+        this.tabs = Array.from(this.querySelectorAll('[data-tab]'));
+        this.cards = Array.from(this.querySelectorAll('[data-card]'));
+        this.grid = this.querySelector('[data-grid]');
+        this.empty = this.querySelector('[data-empty]');
+        this.more = this.querySelector('[data-view-all]');
+        this.limit = parseInt(this.dataset.limit, 10) || 6;
+        if (!this.tabs.length) return;
+
+        this.tabs.forEach((tab) => {
+          tab.tabIndex = tab.classList.contains('is-active') ? 0 : -1;
+          tab.addEventListener('click', () => this.select(tab));
+          tab.addEventListener('keydown', (e) => this.onKey(e, tab));
+        });
+        this.addEventListener('shopify:block:select', (e) => {
+          const tab = e.target.closest('[data-tab]');
+          if (tab) this.select(tab, false);
+        });
+
+        this.select(this.tabs.find((t) => t.classList.contains('is-active')) || this.tabs[0], false);
+      }
+
+      onKey(e, tab) {
+        const i = this.tabs.indexOf(tab);
+        let next = null;
+        if (e.key === 'ArrowRight') next = this.tabs[(i + 1) % this.tabs.length];
+        else if (e.key === 'ArrowLeft') next = this.tabs[(i - 1 + this.tabs.length) % this.tabs.length];
+        else if (e.key === 'Home') next = this.tabs[0];
+        else if (e.key === 'End') next = this.tabs[this.tabs.length - 1];
+        if (next) { e.preventDefault(); next.focus(); this.select(next); }
+      }
+
+      select(tab, animate = true) {
+        const key = tab.dataset.tab;
+        this.tabs.forEach((t) => {
+          const on = t === tab;
+          t.classList.toggle('is-active', on);
+          t.setAttribute('aria-selected', String(on));
+          t.tabIndex = on ? 0 : -1;
+        });
+        this.grid.setAttribute('aria-labelledby', tab.id);
+
+        let shown = 0;
+        this.cards.forEach((card) => {
+          const groups = (card.dataset.groups || '').split(' ');
+          const match = key === 'all' || groups.includes(key);
+          const show = match && shown < this.limit;
+          if (show) shown++;
+          card.hidden = !show;
+        });
+
+        if (this.empty) this.empty.hidden = shown > 0;
+        if (this.more && tab.dataset.url) this.more.href = tab.dataset.url;
+
+        if (animate && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          this.grid.classList.remove('is-in');
+          void this.grid.offsetWidth;
+          this.grid.classList.add('is-in');
+        }
+      }
+    });
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Shimpin our products",
+  "tag": "div",
+  "class": "shimpin-our-products-section",
+  "settings": [
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our products" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Explore versatile essentials that bring together comfort, elegance and effortless style." },
+    { "type": "header", "content": "Tabs" },
+    { "type": "checkbox", "id": "show_all_tab", "label": "Show an \"All\" tab", "info": "Mixes products from every tab below.", "default": true },
+    { "type": "text", "id": "all_label", "label": "\"All\" tab label", "default": "All" },
+    { "type": "url", "id": "all_link", "label": "\"View all\" link for the All tab", "info": "Leave empty to use the all-products page." },
+    { "type": "color", "id": "accent_color", "label": "Active tab underline", "default": "#E6007E" },
+    { "type": "header", "content": "Grid" },
+    { "type": "range", "id": "products_per_tab", "min": 3, "max": 12, "step": 1, "label": "Products shown per tab", "default": 6 },
+    { "type": "select", "id": "columns_desktop", "label": "Columns on desktop", "default": "3", "options": [
+      { "value": "3", "label": "3" }, { "value": "4", "label": "4" }
+    ] },
+    { "type": "select", "id": "image_ratio", "label": "Image shape", "default": "portrait", "options": [
+      { "value": "portrait", "label": "Portrait (4:5)" },
+      { "value": "square", "label": "Square" }
+    ] },
+    { "type": "range", "id": "max_width", "min": 900, "max": 1600, "step": 10, "unit": "px", "label": "Maximum width", "default": 1170 },
+    { "type": "checkbox", "id": "show_view_all", "label": "Show \"View all\" button", "default": true },
+    { "type": "text", "id": "view_all_label", "label": "Button text", "default": "View all" },
+    { "type": "text", "id": "empty_text", "label": "Empty tab message", "default": "New styles are on the way." },
+    { "type": "header", "content": "Cards" },
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating", "default": true },
+    { "type": "checkbox", "id": "show_vendor", "label": "Show vendor name", "default": false },
+    { "type": "checkbox", "id": "show_badge", "label": "Show sale % badge", "default": false },
+    { "type": "checkbox", "id": "enable_quick_view", "label": "Enable quick view (eye button)", "default": false },
+    { "type": "header", "content": "Spacing" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FFFFFF" },
+    { "type": "range", "id": "padding_desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Space above and below (desktop)", "default": 48 },
+    { "type": "range", "id": "padding_mobile", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Space above and below (mobile)", "default": 28 }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "limit": 6,
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "label", "label": "Tab label", "info": "Leave empty to use the collection name." }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Shimpin our products", "blocks": [ { "type": "tab" }, { "type": "tab" }, { "type": "tab" } ] }
+  ]
+}
+{% endschema %}
